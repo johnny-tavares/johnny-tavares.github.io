@@ -16,6 +16,8 @@
         header {
             padding: 20px;
             font-size: 24px;
+            background-color: #1e1e1e;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
         }
         nav {
             margin: 20px 0;
@@ -25,16 +27,28 @@
             text-decoration: none;
             margin: 0 15px;
             font-size: 18px;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ffffff;
         }
         .container {
             max-width: 800px;
             margin: auto;
             padding: 20px;
         }
+        section {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        }
         footer {
             margin-top: 50px;
             padding: 10px;
             font-size: 14px;
+            background-color: #1e1e1e;
         }
     </style>
 </head>
@@ -57,14 +71,32 @@
         <section id="projects">
             <h2>Projects</h2>
             <p>Check out my latest projects on <a href="https://github.com/jtavare3" target="_blank">GitHub</a>.</p>
+            <ul>
+                <li>Project 1 - <em>Cybersecurity Tool</em></li>
+                <li>Project 2 - <em>Game Development</em></li>
+                <li>Project 3 - <em>Machine Learning in Security</em></li>
+            </ul>
         </section>
         <section id="blog">
             <h2>Blog</h2>
             <p>Coming soon! Write-ups, research, and insights.</p>
+            <article>
+                <h3>Latest Post: Introduction to Ethical Hacking</h3>
+                <p>A beginner-friendly guide to ethical hacking and penetration testing.</p>
+            </article>
         </section>
         <section id="contact">
             <h2>Contact</h2>
             <p>Connect with me on <a href="https://linkedin.com/in/johnny-tavares" target="_blank">LinkedIn</a> or email me at <a href="mailto:johnnytavares9000@gmail.com">johnnytavares9000@gmail.com</a>.</p>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" rows="4" required></textarea><br><br>
+                <button type="submit">Send</button>
+            </form>
         </section>
     </div>
     <footer>
