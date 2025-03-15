@@ -65,6 +65,21 @@
             justify-content: center;
             color: #777;
             margin-bottom: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+        }
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+        .image-placeholder:hover {
+            transform: scale(1.05);
+        }
+        .image-placeholder:hover img {
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -83,27 +98,27 @@
     <div class="container">
         <section id="about">
             <h2>About Me</h2>
-            <div class="image-placeholder">Image Here</div>
+            <div class="image-placeholder"><img src="your-image.jpg" alt="About Me Image"></div>
             <p>Insert your about me text here.</p>
         </section>
         <section id="projects">
             <h2>Projects</h2>
-            <div class="image-placeholder">Project Image</div>
+            <div class="image-placeholder"><img src="project-image.jpg" alt="Project Image"></div>
             <p>Insert details about your projects.</p>
         </section>
         <section id="ctf">
             <h2>CTF Write-ups</h2>
-            <div class="image-placeholder">CTF Image</div>
+            <div class="image-placeholder"><img src="ctf-image.jpg" alt="CTF Image"></div>
             <p>Insert your CTF write-ups here.</p>
         </section>
         <section id="research">
             <h2>Research</h2>
-            <div class="image-placeholder">Research Image</div>
+            <div class="image-placeholder"><img src="research-image.jpg" alt="Research Image"></div>
             <p>Insert details about your research.</p>
         </section>
         <section id="blog">
             <h2>Blog</h2>
-            <div class="image-placeholder">Blog Image</div>
+            <div class="image-placeholder"><img src="blog-image.jpg" alt="Blog Image"></div>
             <p>Insert your blog posts here.</p>
         </section>
     </div>
