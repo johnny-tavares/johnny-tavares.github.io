@@ -33,6 +33,7 @@
             margin: 0 15px;
             font-size: 18px;
             transition: color 0.3s, text-shadow 0.3s;
+            cursor: pointer;
         }
         nav a:hover {
             color: #ffffff;
@@ -44,11 +45,15 @@
             padding: 20px;
         }
         section {
+            display: none;
             margin: 40px 0;
             padding: 20px;
             background-color: rgba(20, 20, 20, 0.9);
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 255, 255, 0.2);
+        }
+        section.active {
+            display: block;
         }
         footer {
             margin-top: 50px;
@@ -82,6 +87,17 @@
             transform: scale(1.1);
         }
     </style>
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+        window.onload = () => {
+            showSection('about');
+        };
+    </script>
 </head>
 <body>
     <header>
@@ -89,14 +105,14 @@
         <p>Cybersecurity | Researcher | Game Developer</p>
     </header>
     <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#ctf">CTF Write-ups</a>
-        <a href="#research">Research</a>
-        <a href="#blog">Blog</a>
+        <a onclick="showSection('about')">About</a>
+        <a onclick="showSection('projects')">Projects</a>
+        <a onclick="showSection('ctf')">CTF Write-ups</a>
+        <a onclick="showSection('research')">Research</a>
+        <a onclick="showSection('blog')">Blog</a>
     </nav>
     <div class="container">
-        <section id="about">
+        <section id="about" class="active">
             <h2>About Me</h2>
             <div class="image-placeholder"><img src="your-image.jpg" alt="About Me Image"></div>
             <p>Insert your about me text here.</p>
