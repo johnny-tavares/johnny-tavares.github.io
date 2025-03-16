@@ -170,7 +170,7 @@
 <body>
     <header>
         <h1>Johnny Tavares</h1>
-        <p>Cybersecurity | Researcher | Game Developer</p>
+        <p>Cybersecurity | CTF Enthusiast | Python Developer</p>
     </header>
     <nav>
         <a onclick="showSection('about')">About</a>
@@ -197,7 +197,7 @@
                     Find on Github
                 </a>
                 <div>
-                    <img src="images/Dashboard.png" alt="Threat Dashboard Screenshot">
+                    <img src="Images/Dashboard.png" alt="Threat Dashboard Screenshot">
                 </div>
             </div>
             <div class="subsection" onclick="toggleSubsection('project2')">Home SIEM Lab</div>
@@ -209,7 +209,7 @@
             </div>
         </section>
         <section id="ctf">
-            <h2>CTF Write-ups</h2>
+            <h2>CTF Write-ups(The cool ones!)</h2>
             <div class="subsection" onclick="toggleSubsection('ctf1')">Butler (TCM Security)</div>
             <div id="ctf1" class="subsection-content ctf-content">
                 <h2>Initial Enumeration</h2>
@@ -242,7 +242,7 @@
 
                 <h3>Step 3: Unquoted Service Path Attack</h3>
                 <p>Next, I discovered that the <strong>WiseCare</strong> service had an <strong>unquoted service path</strong> vulnerability, which is a common privilege escalation vector in Windows environments.</p>
-                <img src="images/Buter_WiseCare.png" alt="WiseCare Vulnerability Screenshot">
+                <img src="Images/Buter_WiseCare.png" alt="WiseCare Vulnerability Screenshot">
 
                 <h3>Step 4: Generating Malicious Payload with msfvenom</h3>
                 <p>To take advantage of this, I used <strong>msfvenom</strong> to generate a <strong>reverse shell payload</strong>. The payload I generated was designed to execute a shell on my machine with <strong>SYSTEM</strong> privileges when the vulnerable service starts:</p>
