@@ -192,7 +192,7 @@
             <h2>Projects</h2>
             <div class="subsection" onclick="toggleSubsection('project1')">Threat Dashboard</div>
             <div id="project1" class="subsection-content">
-                <p>A comprehensive security dashboard for monitoring and analyzing potential threats.</p>
+                <p>I engineered a cross-platform monitoring tool with a Python backend and web-based frontend to track live system behavior, including DNS queries, file modifications, and unsigned processes. VirusTotal’s API was helpful for automated malware lookups and I implemented structured logging for forensic traceability.</p>
                 <a href="https://www.github.com/johnny-tavares/Threat_Dashboard" class="project-link">
                     Find on Github
                 </a>
@@ -200,12 +200,15 @@
                     <img src="Images/Dashboard.png" alt="Threat Dashboard Screenshot">
                 </div>
             </div>
-            <div class="subsection" onclick="toggleSubsection('project2')">Home SIEM Lab</div>
+            <div class="subsection" onclick="toggleSubsection('project2')">SIEM Homelab</div>
             <div id="project2" class="subsection-content">
-                <p>A personal Security Information and Event Management lab for practicing threat detection and analysis.</p>
-                <a href="#" class="project-link">
-                    Coming soon
+                <p>A personal SIEM lab built with Splunk to explore real-world threat detection and analysis. Logs from Linux endpoints are forwarded and monitored for SSH brute-force attempts, file integrity changes, suspicious commands, and lateral movement like reverse shells or outbound SSH activity. Custom detection rules and log pipelines simulate realistic attack scenarios for hands-on experience.</p>
+                <a href="https://github.com/johnny-tavares/SIEM-Homelab" class="project-link">
+                    Find on Github
                 </a>
+                 <div>
+                    <img src="Images/SIEM.png" alt="SIEM Example Alert Screenshot">
+                </div>
             </div>
         </section>
         <section id="ctf">
