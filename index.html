@@ -215,6 +215,7 @@
             <h2>CTF Write-ups(The cool ones!)</h2>
             <div class="subsection" onclick="toggleSubsection('ctf1')">Butler (TCM Security)</div>
             <div id="ctf1" class="subsection-content ctf-content">
+                <p><strong>Key Takeaways:</strong> Unquoted service path escalation, Jenkins console reverse shell, msfvenom payload generation.</p>
                 <h2>Initial Enumeration</h2>
                 <p>The first step was running an <strong>nmap scan</strong> to check open ports on the machine. The scan revealed <strong>port 8080</strong> running <strong>HTTP</strong>, which was hosting a <strong>Jenkins</strong> service. With Jenkins running, I decided to attempt a <strong>brute force attack</strong> on the login page using <strong>Burp Suite</strong>.</p>
 
@@ -264,8 +265,45 @@
                 <h2>Conclusion</h2>
                 <p>At this point, I had successfully escalated my privileges to <strong>SYSTEM</strong> and had full control of the machine. The combination of a <strong>Jenkins brute force attack</strong>, <strong>reverse shell through Jenkins</strong>, and exploiting the <strong>unquoted service path vulnerability</strong> in <strong>WiseCare</strong> allowed me to gain full access and escalate privileges on the <strong>Butler</strong> machine.</p>
             </div>
-            <div class="subsection" onclick="toggleSubsection('ctf2')">Coming soon!</div>
+            <div class="subsection" onclick="toggleSubsection('ctf2')">Blackpearl (TCM Security)</div>
             <div id="ctf2" class="subsection-content ctf-content">
+                <p><strong>Key Takeaways:</strong> Virtual hosting with /etc/hosts, SUID exploit using PHP.</p>
+                <h2>Initial Enumeration</h2>
+                <p><strong>Nmap</strong> scan reveals open ports <strong>22, 53, and 80</strong>. Port 53 will come into play later.</p>
+                <p>Source code on port <strong>80</strong> reveals an email address.</p>
+                <p>Started <strong>directory busting</strong>, but <strong>dirbuster didn't work</strong>. <strong>ffuf</strong> did, likely because the target (like <code>/secret</code>) had no file extension. Seems like ffuf handles this better.</p>
+                <p>The <code>/secret</code> directory gave no useful results.</p>
+            
+                <h2>Recon on Port 53</h2>
+                <p>Using <strong>dnsrecon</strong>, found a new virtual host entry.</p>
+                <p>Edited <code>/etc/hosts</code> with <code>sudo nano /etc/hosts</code> to add the machine's IP and domain (e.g., <code>blackpearl.tcm</code>) to our local DNS records.</p>
+                <p>After restarting the browser and visiting <code>http://blackpearl.tcm</code>, an info page appeared.</p>
+                <p>Ran <strong>ffuf</strong> again on this domain and discovered a directory called <code>/navigate</code>.</p>
+                <p>The site was using <strong>Navigate CMS</strong>, which has a known Metasploit exploit.</p>
+            
+                <h2>Exploitation</h2>
+                <p>Used Metasploit's <code>navigate_cms_rce</code> module.</p>
+                <ul>
+                    <li>Set <code>RHOST</code> to the machine’s IP.</li>
+                    <li>Set <code>VHOST</code> to <code>blackpearl.tcm</code>.</li>
+                </ul>
+                <p>Ran the module and got a shell. Used the <code>shell</code> command to interact with it.</p>
+                <p>To get a TTY shell, grabbed a Python one-liner online and updated it to use <code>/bin/bash</code>:</p>
+                <pre><code>python -c 'import pty; pty.spawn("/bin/bash")'</code></pre>
+            
+                <h2>Privilege Escalation</h2>
+                <p>Moved into <code>/tmp</code> and ran <strong>linpeas</strong> from the host machine.</p>
+                <ul>
+                    <li>Used <code>chmod +x</code> to make it executable.</li>
+                    <li>Ran with <code>./linpeas.sh</code>.</li>
+                </ul>
+                <p>In the SUID section, found a red-highlighted binary: <code>/usr/bin/php</code>.</p>
+                <p>Checked <strong>GTFOBins</strong> and found a suitable exploit for SUID PHP:</p>
+                <pre><code>/usr/bin/php7.3 -r "pcntl_exec('/bin/sh', ['-p']);"</code></pre>
+                <p>This gave a root shell. From there, <code>cd /root</code> to grab the flag.</p>
+            </div>
+            <div class="subsection" onclick="toggleSubsection('ctf3')">Coming soon!</div>
+            <div id="ctf3" class="subsection-content ctf-content">
                 <p>More CTF write-ups will be added as I complete them. Stay tuned!</p>
             </div>
         </section>
