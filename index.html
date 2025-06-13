@@ -215,7 +215,8 @@
             <h2>CTF Write-ups(The cool ones!)</h2>
             <div class="subsection" onclick="toggleSubsection('ctf1')">Butler (TCM Security)</div>
             <div id="ctf1" class="subsection-content ctf-content">
-                <p><strong>Key Takeaways:</strong> Unquoted service path escalation, Jenkins console reverse shell, msfvenom payload generation.</p>
+                <h2>Tactics Covered</h2>
+                <p>Unquoted service path escalation, Jenkins console reverse shell, msfvenom payload generation.</p>
                 <h2>Initial Enumeration</h2>
                 <p>The first step was running an <strong>nmap scan</strong> to check open ports on the machine. The scan revealed <strong>port 8080</strong> running <strong>HTTP</strong>, which was hosting a <strong>Jenkins</strong> service. With Jenkins running, I decided to attempt a <strong>brute force attack</strong> on the login page using <strong>Burp Suite</strong>.</p>
 
@@ -267,7 +268,8 @@
             </div>
             <div class="subsection" onclick="toggleSubsection('ctf2')">Blackpearl (TCM Security)</div>
             <div id="ctf2" class="subsection-content ctf-content">
-                <p><strong>Key Takeaways:</strong> Virtual hosting with /etc/hosts, SUID exploit using PHP.</p>
+                <h2>Tactics Covered</h2>
+                <p>Virtual hosting with /etc/hosts, SUID exploit using PHP.</p>
                 <h2>Initial Enumeration</h2>
                 <p><strong>Nmap</strong> scan reveals open ports <strong>22, 53, and 80</strong>. Port 53 will come into play later.</p>
                 <p>Source code on port <strong>80</strong> reveals an email address.</p>
