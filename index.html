@@ -272,11 +272,12 @@
                 <p>Virtual hosting with /etc/hosts, SUID exploit using PHP.</p>
                 <h2>Initial Enumeration</h2>
                 <p><strong>Nmap</strong> scan reveals open ports <strong>22, 53, and 80</strong>. Port 53 will come into play later.</p>
+                <h3>Directory Busting</h3>
                 <p>Source code on port <strong>80</strong> reveals an email address.</p>
                 <p>Started <strong>directory busting</strong>, but <strong>dirbuster didn't work</strong>. <strong>ffuf</strong> did, likely because the target (like <code>/secret</code>) had no file extension. Seems like ffuf handles this better.</p>
                 <p>The <code>/secret</code> directory gave no useful results.</p>
             
-                <h2>Recon on Port 53</h2>
+                <h3>Recon on Port 53</h3>
                 <p>Using <strong>dnsrecon</strong>, found a new virtual host entry.</p>
                 <p>Edited <code>/etc/hosts</code> with <code>sudo nano /etc/hosts</code> to add the machine's IP and domain (e.g., <code>blackpearl.tcm</code>) to our local DNS records.</p>
                 <p>After restarting the browser and visiting <code>http://blackpearl.tcm</code>, an info page appeared.</p>
