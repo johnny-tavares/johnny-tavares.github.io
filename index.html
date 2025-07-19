@@ -76,7 +76,134 @@
             background-color: #111;
         }
         
-        /* New CSS additions */
+        /* Improved About Section Styles */
+        .intro-card {
+            background-color: rgba(20, 20, 20, 0.9);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: left;
+            box-shadow: 0 4px 12px rgba(0, 255, 255, 0.2);
+        }
+        
+        .intro-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .focus-areas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .focus-card {
+            background-color: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .focus-card:hover {
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .focus-card::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 8px;
+            height: 8px;
+            background: #00ffff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ffff;
+        }
+        
+        .focus-card h3 {
+            color: #00ffff;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-left: 25px;
+        }
+        
+        .focus-card p {
+            margin: 0;
+            line-height: 1.5;
+            font-size: 14px;
+            padding-left: 25px;
+        }
+        
+        .status-section {
+            background-color: rgba(30, 30, 30, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            color: #d0d0d0;
+            font-size: 14px;
+            font-weight: 400;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 20px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 25px;
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-link:hover {
+            background: rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+            transform: scale(1.05);
+            color: #ffffff;
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -100%;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .social-link:hover::before {
+            left: 100%;
+        }
+        
+        /* Original CSS additions */
         img {
             max-width: 100%;
             height: auto;
@@ -180,31 +307,56 @@
         <a onclick="showSection('blog')">Blog</a>
     </nav>
     <div class="container">
-         <section id="about" class="active">
-            <h2>About Me</h2>
-            <p>Hi, my name is Johnny Tavares and welcome to my site. I'm a passionate security enthusiast and computer science major, currently pursuing my Security+ certification.</p>
-
-            <ul>
-                <li>My projects involve security tooling and automation, covering areas from exploit development to threat monitoring, as real-world applications or proofs of concept.</li>
-                <li>I practice offensive security through CTFs and write-ups</li>
-                <li>In my research, I aim to explore binary exploitation, vulnerability discovery, and system internals to deepen my understanding of current security challenges.</li>
-                <li>On the side, I enjoy working with Unity and C# to make games when I'm feeling creative</li>
-            </ul>
-
-            <p>Thanks for checking out my work, feel free to look around.</p>
-
-            <ul>
-                <li><a href="https://www.github.com/johnny-tavares">GitHub</a></li>
-                <li><a href="https://www.linkedin.com/in/johnny-tavares">LinkedIn</a></li>
-            </ul>
-
+        <section id="about" class="active">
+            <div class="intro-card">
+                <div class="intro-text">
+                    <p>Hi, I'm <strong>Johnny Tavares</strong> — a passionate security enthusiast and computer science major dedicated to exploring the ever-evolving landscape of cybersecurity. Welcome to my digital space where I document my journey through offensive security, research, and creative development.</p>
+                </div>
+                
+                <div class="focus-areas">
+                    <div class="focus-card">
+                        <h3>🛡️ Security Engineering</h3>
+                        <p>Developing security tooling and automation solutions, from exploit development to threat monitoring systems, with both real-world applications and proof-of-concept implementations.</p>
+                    </div>
+                    
+                    <div class="focus-card">
+                        <h3>⚔️ Offensive Security</h3>
+                        <p>Actively practicing penetration testing through CTF competitions and creating detailed write-ups to share knowledge and techniques.</p>
+                    </div>
+                    
+                    <div class="focus-card">
+                        <h3>🔬 Security Research</h3>
+                        <p>Exploring binary exploitation, vulnerability discovery, and system internals to deepen understanding of current security challenges and emerging threats.</p>
+                    </div>
+                    
+                    <div class="focus-card">
+                        <h3>🎮 Creative Development</h3>
+                        <p>When I need a creative outlet, I enjoy working with Unity and C# to develop games.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="intro-card">
+                <div class="intro-text">
+                    <p>Thanks for checking out my work — feel free to explore my projects, read through my CTF write-ups, or connect with me through the links below. I'm always eager to discuss security topics, share knowledge, and collaborate on interesting challenges.</p>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.github.com/johnny-tavares" class="social-link">
+                        📁 GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/johnny-tavares" class="social-link">
+                        💼 LinkedIn
+                    </a>
+                </div>
+            </div>
         </section>
 
         <section id="projects">
             <h2>Projects</h2>
             <div class="subsection" onclick="toggleSubsection('project1')">Threat Dashboard</div>
             <div id="project1" class="subsection-content">
-                <p>I engineered a cross-platform monitoring tool with a Python backend and web-based frontend to track live system behavior, including DNS queries, file modifications, and unsigned processes. VirusTotal’s API was helpful for automated malware lookups and I implemented structured logging for forensic traceability.</p>
+                <p>I engineered a cross-platform monitoring tool with a Python backend and web-based frontend to track live system behavior, including DNS queries, file modifications, and unsigned processes. VirusTotal's API was helpful for automated malware lookups and I implemented structured logging for forensic traceability.</p>
                 <a href="https://www.github.com/johnny-tavares/Threat_Dashboard" class="project-link">
                     Find on Github
                 </a>
@@ -214,7 +366,15 @@
             </div>
             <div class="subsection" onclick="toggleSubsection('project2')">SIEM Homelab</div>
             <div id="project2" class="subsection-content">
-                <p>A personal SIEM lab built with Splunk to explore real-world threat detection and analysis. Logs from Linux endpoints are forwarded and monitored for SSH brute-force attempts, file integrity changes, suspicious commands, and lateral movement like reverse shells or outbound SSH activity. Custom detection rules and log pipelines simulate realistic attack scenarios for hands-on experience.</p>
+                <p>A personal SIEM lab built with Splunk to explore real-world threat detection and analysis. Logs from Linux endpoints are forwarded and monitored for SSH brute-force attempts, file integrity changes, suspicious commands, and lateral movement like reverse shells or outbound SSH activity. Custom detection rules and log pipelines simulate realistic attack scenarios.</p>
+                <p><strong>Update -</strong> Now includes Active Directory monitoring.</p>
+                <h2>Important Notes from this Update:</h2>
+                <ul>
+                    <li>Universal Forwarders are great for consistent log collection across different environments!</li>
+                    <li>Kerberos event logging (4769, 4624, 4768) is crucial for detecting lots of the major attacks</li>
+                    <li>Interestingly, RC4 encryption usage often indicates kerberoasting attempts</li>
+                    <li>Default Windows audit policies miss a lot security events, I'd need enhanced auditing (Sysmon) to catch more things on process creation, network connections, etc.</li>
+                </ul>
                 <a href="https://github.com/johnny-tavares/SIEM-Homelab" class="project-link">
                     Find on Github
                 </a>
@@ -296,7 +456,7 @@
                 <h2>Exploitation</h2>
                 <p>Used Metasploit's <code>navigate_cms_rce</code> module.</p>
                 <ul>
-                    <li>Set <code>RHOST</code> to the machine’s IP.</li>
+                    <li>Set <code>RHOST</code> to the machine's IP.</li>
                     <li>Set <code>VHOST</code> to <code>blackpearl.tcm</code>.</li>
                 </ul>
                 <p>Ran the module and got a shell. Used the <code>shell</code> command to interact with it.</p>
