@@ -381,14 +381,10 @@
                     Custom detection rules and log pipelines simulate realistic attack scenarios.
                 </p>
             
-                <p><strong>Update:</strong> Now includes <strong>Active Directory monitoring</strong>.</p>
-            
-                <h3>Key Lessons from AD Monitoring</h3>
+                <p><strong>Update:</strong> Added <strong>Active Directory Attack Detection</strong> capabilities, including:</p>
                 <ul>
-                    <li>Universal Forwarders provide consistent log collection across environments.</li>
-                    <li>Kerberos event IDs (<code>4768</code>, <code>4769</code>, <code>4624</code>) are critical for attack detection.</li>
-                    <li>RC4 encryption use often signals Kerberoasting attempts.</li>
-                    <li>Default Windows audit policies miss many events so tools like Sysmon are needed for enhanced auditing (e.g., process creation, network connections).</li>
+                    <li>Kerberoasting</li>
+                    <li>Golden Ticket Attacks <em>(challenging but very rewarding to detect)</em></li>
                 </ul>
                 <a href="https://github.com/johnny-tavares/SIEM-Homelab" class="project-link">
                     Find on Github
