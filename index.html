@@ -563,7 +563,51 @@
         </section>
         <section id="blog">
             <h2>Blog</h2>
-            <p>Blog posts about cybersecurity topics, tutorials, and insights coming soon!</p>
+            <div class="subsection" onclick="toggleSubsection('blog1')">Reverse Engineering XP Solitaire & Minesweeper</div>
+            <div id="blog1" class="subsection-content ctf-content">
+                <h2>Cheating Classic Games: XP Solitaire & Minesweeper</h2>
+                <p><em>Date Posted:</em> July 2025</p>
+        
+                <h3>🕹 Why I Did This</h3>
+                <p>I've always loved the charm of old Windows games, and I wanted to dive into how they worked under the hood. The goal was to reverse engineer the internal logic of Solitaire and Minesweeper to uncover hidden mechanics—and cheat a little along the way.</p>
+        
+                <h3>🔍 Tools Used</h3>
+                <ul>
+                    <li>Ghidra (for static analysis)</li>
+                    <li>x64dbg (for dynamic debugging)</li>
+                    <li>Process Hacker (to inspect memory and DLLs)</li>
+                    <li>Visual Studio (for creating proxy DLLs)</li>
+                </ul>
+        
+                <h3>♠️ Solitaire: Win with One Move</h3>
+                <p>Through disassembly in Ghidra, I found the function responsible for checking the win condition. By placing a breakpoint at this address in x64dbg, I was able to manually trigger the win state by manipulating a register.</p>
+        
+                <pre><code>; At this address in x64dbg, toggle EAX to 1 to force a win
+        mov eax, 1</code></pre>
+        
+                <p>Later, I built a DLL proxy for `cards.dll`, logging every call and intercepting card shuffles.</p>
+        
+                <img src="Images/Solitaire_RE_Example.png" alt="Solitaire Debug Screenshot">
+        
+                <h3>💣 Minesweeper: Seeing Through the Grid</h3>
+                <p>Minesweeper uses a simple array structure for its board. I located it in memory using a pattern search after placing a few known mines. From there, I built a script that reads the mine array in real time and overlays it with an AutoHotkey GUI.</p>
+        
+                <pre><code>; memory offset holding the mine data
+        mov edx, [esi+0x120]</code></pre>
+        
+                <p>Once the memory region was identified, I could even zero it out to remove all mines completely.</p>
+        
+                <img src="Images/Minesweeper_Cheat.png" alt="Minesweeper Hack Demo">
+        
+                <h3>💭 Takeaways</h3>
+                <ul>
+                    <li>Even basic games have fascinating internal logic</li>
+                    <li>DLL hijacking is a powerful way to tamper with runtime behavior</li>
+                    <li>This was a fun and nostalgic intro to reverse engineering binaries</li>
+                </ul>
+        
+                <p>If you're interested in trying this out yourself, feel free to reach out or check the repo (coming soon!).</p>
+            </div>
         </section>
     </div>
     <footer>
