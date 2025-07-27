@@ -1,126 +1,832 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF‑8">
-  <meta name="viewport" content="width=device‑width, initial-scale=1">
-  <title>Johnny Tavares – Security Researcher & Developer</title>
-  <style>
-    /* Base Reset & Typography */
-    body { margin: 0; padding: 0; font-family: 'Source Code Pro', monospace; background: #0a0a0a; color: #d0d0d0; line‑height: 1.6; }
-    a { color: #00ffff; text-decoration: none; transition: color 0.3s; }
-    a:hover { color: #ffffff; }
-    img { max-width: 100%; border: 1px solid #00ffff; border-radius: 4px; }
-    /* Layout */
-    header, section, footer { max-width: 960px; margin: auto; padding: 40px 20px; }
-    header { text-align: center; }
-    nav { display: flex; justify-content: center; gap: 20px; }
-    nav a { font-size: 18px; }
-    section { margin-top: 60px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 30px; }
-    .card { background: rgba(20,20,20,0.9); border-radius: 8px; padding: 20px; box-shadow: 0 4px 12px rgba(0,255,255,0.2); }
-    .card h3 { color: #00ffff; margin-top: 0; }
-    /* Blog & Write‑ups toggler */
-    .toggle { cursor: pointer; margin-bottom: 10px; font-size: 20px; color: #00ffff; }
-    .toggle + .content { display: none; }
-    /* Footer */
-    footer { text-align: center; font-size: 14px; background: #111; padding: 20px 0; margin-top: 80px; }
-    @media (max-width: 600px){ nav a { font-size: 16px; } }
-  </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.toggle').forEach(el => {
-        el.addEventListener('click', () => {
-          const c = el.nextElementSibling;
-          c.style.display = (c.style.display === 'block') ? 'none' : 'block';
-        });
-      });
-    });
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Johnny Tavares | Security Researcher & Developer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+        
+        :root {
+            --primary-cyan: #00e5ff;
+            --secondary-cyan: #0891b2;
+            --dark-bg: #0a0a0a;
+            --card-bg: #111111;
+            --card-hover: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #808080;
+            --border-color: rgba(0, 229, 255, 0.2);
+            --shadow-color: rgba(0, 229, 255, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-cyan);
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-cyan);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-cyan);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding-top: 70px;
+        }
+        
+        .section {
+            padding: 4rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.05) 0%, transparent 50%);
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-text .subtitle {
+            font-size: 1.3rem;
+            color: var(--primary-cyan);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-text .description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary-cyan);
+            color: var(--dark-bg);
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 229, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-cyan);
+            border: 2px solid var(--primary-cyan);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-cyan);
+            color: var(--dark-bg);
+        }
+        
+        .hero-stats {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-cyan);
+            display: block;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .card:hover {
+            background: var(--card-hover);
+            border-color: var(--primary-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px var(--shadow-color);
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .expertise-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .expertise-card:hover {
+            border-color: var(--primary-cyan);
+            transform: translateY(-5px);
+        }
+        
+        .expertise-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--secondary-cyan));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .expertise-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .expertise-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-cyan);
+            box-shadow: 0 10px 40px var(--shadow-color);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: var(--card-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .project-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        
+        .project-content {
+            padding: 2rem;
+        }
+        
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tech-tag {
+            background: rgba(0, 229, 255, 0.1);
+            color: var(--primary-cyan);
+            padding: 0.25rem 0.75rem;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .project-link {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            color: var(--primary-cyan);
+            border: 1px solid var(--primary-cyan);
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            background: var(--primary-cyan);
+            color: var(--dark-bg);
+        }
+        
+        /* CTF Section */
+        .ctf-grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .ctf-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .ctf-card:hover {
+            border-color: var(--primary-cyan);
+        }
+        
+        .ctf-header {
+            padding: 1.5rem 2rem;
+            background: rgba(0, 229, 255, 0.05);
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .ctf-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .ctf-tactics {
+            color: var(--primary-cyan);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .ctf-content {
+            padding: 2rem;
+            display: none;
+        }
+        
+        .ctf-content.active {
+            display: block;
+        }
+        
+        .ctf-content h2 {
+            color: var(--primary-cyan);
+            font-size: 1.3rem;
+            margin: 2rem 0 1rem 0;
+        }
+        
+        .ctf-content h3 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+        
+        .ctf-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .ctf-content ul,
+        .ctf-content ol {
+            color: var(--text-secondary);
+            margin: 1rem 0 1rem 2rem;
+        }
+        
+        .ctf-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .ctf-content pre {
+            background: #000;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .ctf-content code {
+            color: var(--primary-cyan);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .ctf-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin: 1rem 0;
+        }
+        
+        .expand-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .expand-icon.rotated {
+            transform: rotate(180deg);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .footer-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-cyan);
+        }
+        
+        .footer-info p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            border-color: var(--primary-cyan);
+            color: var(--primary-cyan);
+            transform: translateY(-2px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .section {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-on-scroll {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Johnny Tavares</h1>
-    <p>Security Researcher • CTF Enthusiast • Systems & Creative Developer</p>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#ctf">CTF Write‑ups</a>
-      <a href="#blog">Blog</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#hero" class="logo">Johnny Tavares</a>
+            <ul class="nav-menu">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#ctf" class="nav-link">CTF Write-ups</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <div class="grid">
-      <div class="card">
-        <p>I’m a security enthusiast and CS major with a passion for reverse engineering, exploitation, and creative systems development.</p>
-        <p>I build tools for threat monitoring, explore systems internals, and love developing interactive projects in Unity & C#.</p>
-      </div>
-      <div class="card">
-        <h3>Skills & Tools</h3>
-        <ul>
-          <li>Ghidra, x64dbg, WinDbg</li>
-          <li>Python, C++, C#</li>
-          <li>Splunk, SIEM tooling</li>
-          <li>Metasploit, Burp Suite, Nmap</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="hero section">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Johnny Tavares</h1>
+                    <p class="subtitle">Security Researcher & Developer</p>
+                    <p class="description">Passionate about offensive security, system internals, and building tools that make the digital world safer. Currently pursuing computer science while actively contributing to the cybersecurity community through research and practical applications.</p>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn btn-primary">View My Work</a>
+                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">CTF Challenges</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Major Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">2+</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">∞</span>
+                            <span class="stat-label">Passion for Security</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Threat Dashboard</h3>
-        <p>Live system behavior tracker with DNS/file/unsigned process monitoring and VirusTotal integration.</p>
-      </div>
-      <div class="card">
-        <h3>SIEM Homelab</h3>
-        <p>Custom Splunk lab with detection rules for AD attacks: Kerberoasting, Golden Ticket detection, lateral movement alerts.</p>
-      </div>
-      <div class="card">
-        <h3>Game Reverse Engineering (XP Solitaire)</h3>
-        <p>Analyzed Solitaire logic via Ghidra & x64dbg, implemented DLL proxying to log shuffle logic and force win states.</p>
-      </div>
-    </div>
-  </section>
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">A security enthusiast dedicated to understanding and improving digital security through hands-on research and practical applications.</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a passionate security researcher and computer science major with a deep fascination for offensive security and system internals. My journey in cybersecurity is driven by curiosity and a commitment to understanding how things work at the deepest level.</p>
+                    
+                    <p>Through continuous learning and practical application, I've developed expertise in threat detection, binary exploitation, and security automation. I believe in sharing knowledge with the community and contributing to a safer digital landscape.</p>
+                </div>
+                <div class="about-text">
+                    <p>When I'm not diving into security research or solving CTF challenges, I enjoy exploring creative development projects, particularly game development with Unity and C#. This creative outlet helps me approach security problems from unique angles.</p>
+                    
+                    <p>I'm always eager to connect with fellow security enthusiasts, collaborate on interesting projects, and contribute to the ongoing evolution of cybersecurity practices.</p>
+                </div>
+            </div>
 
-  <section id="ctf">
-    <h2>CTF Write‑ups</h2>
-    <div>
-      <div class="toggle">Butler (TCM Security)</div>
-      <div class="content">
-        <p>Unquoted service path escalation, msfvenom payload generation, SYSTEM shell via WiseCare service.</p>
-      </div>
-      <div class="toggle">Blackpearl (TCM Security)</div>
-      <div class="content">
-        <p>Virtual hosting via /etc/hosts, Navigate CMS RCE, root shell via SUID PHP exploit.</p>
-      </div>
-      <!-- etc -->
-    </div>
-  </section>
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <div class="expertise-icon">🛡️</div>
+                    <h3 class="expertise-title">Security Engineering</h3>
+                    <p class="expertise-description">Developing security tooling and automation solutions in threat monitoring, with both real-world applications and proof-of-concept implementations.</p>
+                </div>
+                
+                <div class="expertise-card">
+                    <div class="expertise-icon">⚔️</div>
+                    <h3 class="expertise-title">Offensive Security</h3>
+                    <p class="expertise-description">Actively practicing binary exploitation and penetration testing through CTFs and reverse engineering challenges, creating detailed write-ups to share knowledge.</p>
+                </div>
+                
+                <div class="expertise-card">
+                    <div class="expertise-icon">🔬</div>
+                    <h3 class="expertise-title">Security Research</h3>
+                    <p class="expertise-description">Exploring system internals to better understand exploitation techniques, hardware-software interaction, and emerging security threats.</p>
+                </div>
+                
+                <div class="expertise-card">
+                    <div class="expertise-icon">🎮</div>
+                    <h3 class="expertise-title">Creative Development</h3>
+                    <p class="expertise-description">When I need a creative outlet, I enjoy working with Unity and C# to develop games, bringing a unique perspective to problem-solving.</p>
+                </div>
+            </div>
+        </section>
 
-  <section id="blog">
-    <h2>Blog</h2>
-    <div>
-      <div class="toggle">Reverse Engineering XP Solitaire & Minesweeper</div>
-      <div class="content">
-        <p><em>July 2025</em> – A walkthrough of finding win‑state code in Solitaire and mining memory structures to cheat Minesweeper.</p>
-      </div>
-    </div>
-  </section>
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">A showcase of my technical projects spanning security research, threat detection, and reverse engineering.</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="Images/Dashboard.png" alt="Threat Dashboard Interface" />
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Threat Dashboard</h3>
+                        <p class="project-description">A cross-platform monitoring tool with Python backend and web-based frontend to track live system behavior, including DNS queries, file modifications, and unsigned processes. Features VirusTotal API integration and structured logging for forensic traceability.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Web Frontend</span>
+                            <span class="tech-tag">VirusTotal API</span>
+                            <span class="tech-tag">Real-time Monitoring</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://www.github.com/johnny-tavares/Threat_Dashboard" class="project-link">View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
-    <p>GitHub: <a href="https://github.com/johnny-tavares">github.com/johnny‑tavares</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/johnny‑tavares">linkedin.com/in/johnny‑tavares</a></p>
-  </section>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="Images/SIEM.png" alt="SIEM Dashboard Alert" />
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">SIEM Homelab</h3>
+                        <p class="project-description">A comprehensive SIEM lab built with Splunk for real-world threat detection. Monitors SSH brute-force attempts, file integrity changes, and lateral movement. Recently expanded with Active Directory attack detection including Kerberoasting and Golden Ticket attacks.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Splunk</span>
+                            <span class="tech-tag">Active Directory</span>
+                            <span class="tech-tag">Threat Detection</span>
+                            <span class="tech-tag">Linux</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/johnny-tavares/SIEM-Homelab" class="project-link">View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
 
-  <footer>
-    <p>© 2025 Johnny Tavares. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="Images/Solitaire.png" alt="XP Solitaire Reverse Engineering" />
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Game Binary Reverse Engineering</h3>
+                        <p class="project-description">A reverse engineering project analyzing XP Solitaire to uncover internal logic and hidden functionality. Utilized static and dynamic analysis techniques including Ghidra disassembly, x64dbg debugging, and DLL hijacking/proxying in C++.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Ghidra</span>
+                            <span class="tech-tag">x64dbg</span>
+                            <span class="tech-tag">C++</span>
+                            <span class="tech-tag">DLL Hijacking</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Documentation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTF Section -->
+        <section id="ctf" class="section">
+            <div class="section-header">
+                <h2 class="section-title">CTF Write-ups</h2>
+                <p class="section-subtitle">Detailed breakdowns of capture-the-flag challenges, showcasing various exploitation techniques and methodologies.</p>
+            </div>
+            
+            <div class="ctf-grid">
+                <div class="ctf-card">
+                    <div class="ctf-header" onclick="toggleCTF('ctf-butler')">
+                        <div>
+                            <h3 class="ctf-title">Butler (TCM Security)</h3>
+                            <p class="ctf-tactics">Unquoted service path escalation, msfvenom payload generation</p>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div id="ctf-butler" class="ctf-content">
+                        <h2>Initial Enumeration</h2>
+                        <p>The first step was running an <strong>nmap scan</strong> to check open ports on the machine. The scan revealed <strong>port 8080</strong> running <strong>HTTP</strong>, which was hosting a <strong>Jenkins</strong> service. With Jenkins running, I decided to attempt a <strong>brute force attack</strong> on the login page using <strong>Burp Suite</strong>.</p>
+
+                        <h3>Brute Forcing with Burp Suite</h3>
+                        <p>Using a <strong>Cluster Bomb attack</strong> in Burp Suite, I tried a few common usernames and passwords. After some testing, the valid credentials turned out to be:</p>
+                        <ul>
+                            <li><strong>Username:</strong> jenkins</li>
+                            <li><strong>Password:</strong> jenkins</li>
+                        </ul>
+
+                        <h2>Exploitation</h2>
+                        <p>Once logged into Jenkins, I searched for known <strong>Jenkins exploits</strong>. There is a vulnerability that allows us to gain a <strong>reverse shell</strong> through the Jenkins <strong>console</strong> in the settings. This vulnerability gave me system access, and I was now logged in as the user <strong>butler</strong>.</p>
+
+                        <h2>Privilege Escalation</h2>
+                        <h3>Step 1: Downloading and Hosting WinPEAS</h3>
+                        <p>First, I downloaded <strong>winpeas</strong>, a tool designed for privilege escalation enumeration on Windows. To make <strong>winpeas</strong> available to the machine, I hosted a <strong>Python HTTP server</strong>:</p>
+                        <pre><code>python -m http.server 80</code></pre>
+
+                        <h3>Step 3: Unquoted Service Path Attack</h3>
+                        <p>I discovered that the <strong>WiseCare</strong> service had an <strong>unquoted service path</strong> vulnerability, which is a common privilege escalation vector in Windows environments.</p>
+                        <img src="Images/Buter_WiseCare.png" alt="WiseCare Vulnerability Screenshot">
+
+                        <h3>Step 4: Generating Malicious Payload with msfvenom</h3>
+                        <p>To take advantage of this, I use
