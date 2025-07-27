@@ -541,6 +541,11 @@
             border-color: var(--primary-cyan);
             box-shadow: 0 10px 40px var(--shadow-color);
         }
+        .blog-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
         
         .blog-content {
             padding: 2rem;
