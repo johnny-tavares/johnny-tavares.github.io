@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse Engineering and Cheating Windows XP Games for Fun | Johnny Tavares</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="../index.html" class="logo">Johnny Tavares</a>
+            <ul class="nav-menu">
+                <li><a href="../index.html#about" class="nav-link">About</a></li>
+                <li><a href="../index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="../index.html#ctf" class="nav-link">CTF Write-ups</a></li>
+                <li><a href="index.html" class="nav-link active">Blog</a></li>
+                <li><a href="../index.html#research" class="nav-link">Research</a></li>
+                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <article class="blog-post">
+            <div class="blog-post-container">
+                <!-- Blog Post Header -->
+                <header class="blog-post-header">
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Insights</span>
+                        <span class="blog-date">Jul 25, 2025</span>
+                    </div>
+                    <h1 class="blog-post-title">Reverse Engineering and Cheating Windows XP Games for Fun</h1>
+                    <p class="blog-post-excerpt">A dive into static and dynamic reverse engineering by analyzing old-school Windows XP games. I explore memory editing, debugging, and modifying in-game behavior—all without source code.</p>
+                    <div class="blog-post-tags">
+                        <span class="blog-tag">Reverse Engineering</span>
+                        <span class="blog-tag">Game Hacking</span>
+                        <span class="blog-tag">Static Analysis</span>
+                        <span class="blog-tag">Dynamic Analysis</span>
+                        <span class="blog-tag">Memory Analysis</span>
+                    </div>
+                </header>
+
+                <!-- Blog Post Content -->
+                <div class="blog-post-content">
+                    <div class="status-notice">
+                        <p><strong>Status:</strong> This post is currently unfinished and represents work in progress.</p>
+                    </div>
+
+                    <h2>Introduction</h2>
+                    <p>When I was younger, I vaguely remember playing classic Windows XP games like Minesweeper and Pinball with the guy in the spacesuit. Recently, I decided to revisit these games from a security researcher's perspective, not to play them, but to understand how they work under the hood and see if I could modify their behavior without access to source code.</p>
+                                                    
+                    <h2>What is Reverse Engineering?</h2>
+                    <p>Reverse engineering is the process of discovering how something works by examining its structure and behavior, rather than having access to blueprints or source code. In software, this means analyzing compiled binaries to understand their functionality, algorithms, and data structures.</p>
+                    
+                    <p>There are two main approaches to reverse engineering software:</p>
+                    <ul>
+                        <li><strong>Static Analysis:</strong> Examining the code without running it, using disassemblers to convert machine code back into readable assembly</li>
+                        <li><strong>Dynamic Analysis:</strong> Observing program behavior while it's running, using debuggers and memory analysis tools</li>
+                    </ul>
+                    
+                    <h2>Tools of the Trade</h2>
+                    <p>In attacking these games, I used several key tools:</p>
+                    <ul>
+                        <li><strong>Ghidra:</strong> A powerful tool for analyzing compiled code</li>
+                        <li><strong>x64dbg:</strong> A Windows debugger for examining program execution flow</li>
+                    </ul>
+                    
+                    <h2>Case Study: Minesweeper</h2>
+                    <p>Let's start with a simple example: the classic Windows XP Minesweeper game. My goal was to reveal all mine locations without clicking on them.</p>
+                    
+                    <h3>Dynamic Analysis Approach</h3>                            
+                    <p>The key insight was that the game must store mine locations somewhere in memory. By comparing memory snapshots before and after starting new games, I could identify memory regions that changed consistently with the minefield layout.</p>
+                    
+                    <h3>Finding the Mine Array</h3>
+                    <p>After some experimentation, I discovered that mine locations were stored as a 2D array in memory. Each cell contained a value indicating whether it contained a mine and how many adjacent mines it had. By locating this array and reading its values, I could effectively "see through" the unrevealed tiles.</p>
+                    
+                    <h2>Case Study: Solitaire Score Manipulation</h2>
+                    <p>Next, I tackled Windows Solitaire, focusing on the scoring system. The challenge was to understand how scores were calculated and stored, then modify them in real-time.</p>
+                    
+                    <h2>Conclusion</h2>
+                    <p>Reverse engineering classic Windows games provided an excellent introduction to the field while working with familiar, non-malicious software.</p>
+                    
+                    <p>What started as curiosity about childhood games evolved into practical knowledge applicable to malware analysis, vulnerability research, and security tool development. It's a perfect example of how random exploration can lead to serious technical skills.</p>
+                </div>
+
+                <!-- Blog Post Footer -->
+                <footer class="blog-post-footer">
+                    <div class="blog-navigation">
+                        <a href="index.html" class="nav-button">← Back to Blog</a>
+                    </div>
+                </footer>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2025 Johnny Tavares. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                header.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+    </script>
+
+    <style>
+        /* Blog Post Specific Styles */
+        .blog-post {
+            padding-top: 2rem;
+        }
+
+        .blog-post-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .blog-post-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .blog-post-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-post-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .blog-post-excerpt {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .blog-post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .blog-post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .blog-post-content h2 {
+            font-size: 1.8rem;
+            color: var(--primary-cyan);
+            margin: 2.5rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .blog-post-content h3 {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin: 2rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .blog-post-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-post-content ul,
+        .blog-post-content ol {
+            margin: 1.5rem 0 1.5rem 2rem;
+        }
+
+        .blog-post-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .blog-post-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .status-notice {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .status-notice p {
+            color: #ffc107;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .blog-post-footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .blog-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-button {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            color: var(--primary-cyan);
+            border: 1px solid var(--primary-cyan);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--primary-cyan);
+            color: var(--dark-bg);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .blog-post-container {
+                padding: 0 1rem;
+            }
+
+            .blog-post-title {
+                font-size: 2rem;
+            }
+
+            .blog-post-content {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</body>
+</html>
