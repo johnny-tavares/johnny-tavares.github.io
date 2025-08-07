@@ -218,15 +218,63 @@
     </footer>
 
     <script>
-        // Header background on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(10, 10, 10, 0.98)';
-            } else {
-                header.style.background = 'rgba(10, 10, 10, 0.95)';
+    // Header background on scroll
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('.header');
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(10, 10, 10, 0.98)';
+        } else {
+            header.style.background = 'rgba(10, 10, 10, 0.95)';
+        }
+    });
+
+    // Image modal functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Create modal overlay
+        const modalOverlay = document.createElement('div');
+        modalOverlay.className = 'image-modal-overlay';
+        modalOverlay.innerHTML = `
+            <div class="image-modal-content">
+                <button class="modal-close">&times;</button>
+                <img src="" alt="">
+            </div>
+        `;
+        document.body.appendChild(modalOverlay);
+
+        const modalImg = modalOverlay.querySelector('img');
+        const closeBtn = modalOverlay.querySelector('.modal-close');
+
+        // Add click handlers to all blog images
+        const blogImages = document.querySelectorAll('.blog-post-content img');
+        blogImages.forEach(img => {
+            img.addEventListener('click', function() {
+                modalImg.src = this.src;
+                modalImg.alt = this.alt;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            });
+        });
+
+        // Close modal handlers
+        closeBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) {
+                closeModal();
             }
         });
+
+        // ESC key to close
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+    });
     </script>
 </body>
 </html>
