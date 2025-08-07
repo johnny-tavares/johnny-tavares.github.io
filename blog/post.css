@@ -84,14 +84,13 @@
 
 /* Image Styles for Consistency Across All Screens */
 .blog-post-content img {
-    max-width: 100%;
+    max-width: 600px;
     height: auto;
     display: block;
     margin: 2rem auto;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     border: 1px solid var(--border-color);
-    transition: box-shadow 0.3s ease, opacity 0.3s ease;
     cursor: pointer;
 }
 
@@ -144,11 +143,6 @@
     object-fit: contain;
 }
 
-.image-modal-content img:hover {
-    opacity: 1;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-}
-
 /* Close button */
 .modal-close {
     position: fixed;
@@ -187,12 +181,7 @@
     border-radius: 4px;
     font-size: 14px;
     opacity: 0;
-    transition: opacity 0.3s ease;
     pointer-events: none;
-}
-
-.blog-post-content img:hover::after {
-    opacity: 1;
 }
 
 /* For code blocks/pre elements */
