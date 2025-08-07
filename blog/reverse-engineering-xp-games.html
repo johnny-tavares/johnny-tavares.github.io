@@ -32,7 +32,7 @@
                         <span class="blog-date">Jul 25, 2025</span>
                     </div>
                     <h1 class="blog-post-title">Reverse Engineering and Cheating Windows XP Games for Fun</h1>
-                    <p class="blog-post-excerpt">A dive into static and dynamic reverse engineering by analyzing old-school Windows XP games. I explore memory editing, debugging, and modifying in-game behavior—all without source code.</p>
+                    <p class="blog-post-excerpt">A dive into static and dynamic reverse engineering by analyzing old-school Windows XP games. I explore memory editing, debugging, and modifying in-game behavior, all without source code.</p>
                     <div class="blog-post-tags">
                         <span class="blog-tag">Reverse Engineering</span>
                         <span class="blog-tag">Game Hacking</span>
@@ -49,7 +49,7 @@
                     </div>-->
 
                     <h2>Introduction</h2>
-                    <p>I have faint memories from when I was around five years old, playing classic Windows XP games like SimCity and Space Cadet Pinball. At the time, they felt incredibly cool—almost magical. Recently, I decided to revisit those games, not to relive childhood nostalgia, but to approach them from a security researcher's perspective. I wanted to understand how they work under the hood and explore whether I could modify their behavior without access to the source code. To keep things manageable, I focused on Solitaire and Minesweeper, since the others were much more complex and would have taken way more time to reverse engineer.</p>
+                    <p>I have faint memories from when I was around five years old, playing classic Windows XP games like SimCity and Space Cadet Pinball. Recently, I decided to revisit those games, not to relive childhood nostalgia, but to approach them from a security researcher's perspective. I wanted to understand how they work under the hood and explore whether I could modify their behavior without access to the source code. To keep things manageable, I focused on Solitaire and Minesweeper, since the others were much more complex and would have taken way more time to reverse engineer.</p>
                                                     
                     <h2>What is Reverse Engineering?</h2>
                     <p>Reverse engineering is the process of discovering how something works by examining its structure and behavior, rather than having access to blueprints or source code. In software, this means analyzing compiled binaries to understand their functionality, algorithms, and data structures.</p>
@@ -162,7 +162,9 @@
 
                         <p>I investigated many of the functions, and usually I could tell they were graphics-related when I saw references to pixels, bitmaps, or similar graphics terminology. That seemed to be what most of them were for.</p>
 
-                        <p>But while messing around with the data, I discovered that if *DAT_01005000 doesn't get set to 0x10 and instead stays as 0x1(I got 0x1 from x32dbg), you can continue playing even after hitting a mine. This actually fulfilled my goal since you can still win and put your name on the leaderboard. However depending on who you ask, you technically lose since you hit a mine. Plus, every click after the mine revives the poor smiley face just long enough to remember he's supposed to be dead, then he dies again. I've basically turned Minesweeper into a torture simulator..</p>
+                        <p>But while messing around with the data, I discovered that if *DAT_01005000 doesn't get set to 0x10 and instead stays as 0x1(I got 0x1 from x32dbg), you can continue playing even after hitting a mine. This actually fulfilled my goal since you can still win and put your name on the leaderboard. However depending on who you ask, you technically lose since you hit a mine.</p>
+                        <p>Plus, every click after the mine revives the poor smiley face just long enough to remember he's supposed to be dead, then he dies again. I've basically turned Minesweeper into a torture simulator..</p>
+
                         <img src="Images/Blog1/Attempt2.png" alt="Attempt 2">
 
                         <h3>Attempt 3: Don't Even Hit a Mine in the First Place</h3>
@@ -189,7 +191,7 @@
                         <ul>
                         <li><strong>Attempt 1:</strong> Simple but boring - basically removes the gameplay</li>
                         <li><strong>Attempt 2:</strong> Allows continuation after hitting mines but technically counts as a loss</li>
-                        <li><strong>Attempt 3:</strong> Difficult code injection but reveals mines without losing, and Smiley stays happy/li>
+                        <li><strong>Attempt 3:</strong> Difficult code injection but reveals mines without losing, and Smiley stays happy</li>
                         </ul>
 
                         <p>The progression from simply removing mines to manipulating game state to custom code injection shows how reverse engineering often involves multiple approaches to solve the same problem, each with different trade-offs.</p>
