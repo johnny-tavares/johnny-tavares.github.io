@@ -228,7 +228,7 @@
         }
     });
 
-    // Image modal functionality
+    // Simple image modal functionality
     document.addEventListener('DOMContentLoaded', function() {
         // Create modal overlay
         const modalOverlay = document.createElement('div');
@@ -251,29 +251,24 @@
                 modalImg.src = this.src;
                 modalImg.alt = this.alt;
                 modalOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling
+                document.body.style.overflow = 'hidden';
             });
         });
 
-        // Close modal handlers
-        closeBtn.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', function(e) {
-            if (e.target === modalOverlay) {
-                closeModal();
-            }
-        });
-
-        // ESC key to close
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
-                closeModal();
-            }
-        });
-
+        // Close modal function
         function closeModal() {
             modalOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
+            document.body.style.overflow = '';
         }
+
+        // Close handlers
+        closeBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
     });
     </script>
 </body>
