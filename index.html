@@ -352,15 +352,17 @@
                 <div class="research-card">
                     <div class="research-content">
                         <div class="research-status">
-                            <span class="status-badge in-progress">In Progress</span>
+                            <span class="status-badge completed" style="background-color: #4ade80; color: #000;">Completed</span>
                         </div>
                         <h3 class="research-title">Optimizing Adversarial Defenses With CUDA</h3>
                         <p class="research-description">
-                            Researching methods to accelerate adversarial defense mechanisms using CUDA parallelization. 
-                            This project focuses on optimizing computational overhead for robust machine learning models to enable real-time defense deployment.
+                            Developed a fused GPU kernel for PyTorch that integrates spatial smoothing and feature squeezing to mitigate adversarial attacks (PGD). 
+                            The optimized implementation reduces inference overhead to a negligible 1.4%, compared to 68.3% using standard libraries like Kornia, 
+                            making robust defense viable for real-time systems.
                         </p>
                         <div class="project-links" style="margin-top: 15px;">
                             <a href="https://github.com/johnny-tavares/Optimizing-Adversarial-Defenses-With-CUDA" class="project-link">View on GitHub</a>
+                            <a href="papers/CUDA_Defense_Paper.pdf" class="project-link" target="_blank">Read Paper (PDF)</a>
                         </div>
                     </div>
                 </div>
