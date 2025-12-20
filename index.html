@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <nav class="nav-container">
             <ul class="nav-menu">
@@ -21,9 +20,7 @@
         </nav>
     </header>
 
-    <!-- Main Content -->
     <main class="main-content">
-        <!-- Hero Section -->
         <section id="hero" class="hero section">
             <div class="hero-content">
                 <div class="hero-text">
@@ -58,7 +55,6 @@
             </div>
         </section>
 
-        <!-- About Section -->
         <section id="about" class="section">
             <div class="section-header">
                 <h2 class="section-title">About Me</h2>
@@ -92,7 +88,6 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
         <section id="projects" class="section">
             <div class="section-header">
                 <h2 class="section-title">Featured Projects</h2>
@@ -140,7 +135,6 @@
             </div>
         </section>
 
-        <!-- CTF Section -->
         <section id="ctf" class="section">
             <div class="section-header">
                 <h2 class="section-title">CTF Write-ups</h2>
@@ -294,7 +288,6 @@
             </div>
         </section>
 
-        <!-- Blog Section -->
         <section id="blog" class="section">
             <div class="section-header">
                 <h2 class="section-title">Featured Blogs</h2>
@@ -332,7 +325,6 @@
             </div>
         </section>
 
-        <!-- Research Section -->
         <section id="research" class="section">
             <div class="section-header">
                 <h2 class="section-title">Security Research</h2>
@@ -343,17 +335,35 @@
                 <div class="research-card">
                     <div class="research-content">
                         <div class="research-status">
-                            <span class="status-badge in-progress">In Progress</span>
+                            <span class="status-badge completed" style="background-color: #4ade80; color: #000;">Completed</span>
                         </div>
                         <h3 class="research-title">LLVM-Based Kernel Backdoor Injection (PoC)</h3>
                         <p class="research-description">
-                            Developing an LLVM pass that can scan the intermediate representation of either one, or multiple Linux kernel source files
-                            for privilege granting functions, and inject code to act as a backdoor for an attacker's malicious process. Inspiration
-                            is taken from Ken Thompson's "Trusting Trust"(1984).
+                            Developed an LLVM pass capable of scanning the intermediate representation of Linux kernel source files
+                            for privilege-granting functions. The tool injects code to act as a backdoor for malicious processes, 
+                            demonstrating supply chain risks inspired by Ken Thompson's "Trusting Trust".
                         </p>
+                        <div class="project-links" style="margin-top: 15px;">
+                            <a href="https://github.com/johnny-tavares/Offensive-LLVM-Pass" class="project-link">View on GitHub</a>
+                        </div>
                     </div>
                 </div>
 
+                <div class="research-card">
+                    <div class="research-content">
+                        <div class="research-status">
+                            <span class="status-badge in-progress">In Progress</span>
+                        </div>
+                        <h3 class="research-title">Optimizing Adversarial Defenses With CUDA</h3>
+                        <p class="research-description">
+                            Researching methods to accelerate adversarial defense mechanisms using CUDA parallelization. 
+                            This project focuses on optimizing computational overhead for robust machine learning models to enable real-time defense deployment.
+                        </p>
+                        <div class="project-links" style="margin-top: 15px;">
+                            <a href="https://github.com/johnny-tavares/Optimizing-Adversarial-Defenses-With-CUDA" class="project-link">View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="research-note">
@@ -363,7 +373,6 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact" class="section">
             <div class="section-header">
                 <h2 class="section-title">Let's Connect</h2>
@@ -387,7 +396,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-bottom">
             <p>&copy; 2025 Johnny Tavares. All rights reserved.</p>
