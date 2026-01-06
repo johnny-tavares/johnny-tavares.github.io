@@ -11,10 +11,10 @@
         <nav class="nav-container">
             <ul class="nav-menu">
                 <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#research" class="nav-link">Research</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#ctf" class="nav-link">CTF Write-ups</a></li>
                 <li><a href="#blog" class="nav-link">Blog</a></li>
-                <li><a href="#research" class="nav-link">Research</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </nav>
@@ -28,7 +28,7 @@
                     <p class="subtitle">Security Researcher & Developer</p>
                     <p class="description">Hi, I'm Johnny Tavares, a passionate security enthusiast and computer science major. Welcome to my digital space where I document my journey through offensive and defensive security, research, and creative development.</p>
                     <div class="cta-buttons">
-                        <a href="#projects" class="btn btn-primary">View My Work</a>
+                        <a href="#research" class="btn btn-primary">View Research</a>
                         <a href="#contact" class="btn btn-secondary">Get In Touch</a>
                     </div>
                 </div>
@@ -47,8 +47,8 @@
                             <span class="stat-label">CTF Solves</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">2</span>
-                            <span class="stat-label">Blog Posts</span>
+                            <span class="stat-number">20+</span>
+                            <span class="stat-label">Crackmes Solved</span>
                         </div>
                     </div>
                 </div>
@@ -88,10 +88,60 @@
             </div>
         </section>
 
+        <section id="research" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Systems Security Research</h2>
+                <p class="section-subtitle">Low-level engineering projects exploring compiler-based attacks and hardware-accelerated defense.</p>
+            </div>
+            
+            <div class="research-grid">
+                <div class="research-card">
+                    <div class="research-content">
+                        <div class="research-status">
+                            <span class="status-badge completed" style="background-color: #4ade80; color: #000;">Completed</span>
+                        </div>
+                        <h3 class="research-title">Automated Kernel Supply Chain Attack via LLVM</h3>
+                        <p class="research-description">
+                            Developed an LLVM pass capable of scanning the intermediate representation of Linux kernel source files
+                            for privilege-granting functions. The tool injects code to act as a backdoor for malicious processes, 
+                            demonstrating supply chain risks inspired by Ken Thompson's "Trusting Trust".
+                        </p>
+                        <div class="project-links" style="margin-top: 15px;">
+                            <a href="https://github.com/johnny-tavares/Offensive-LLVM-Pass" class="project-link">View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="research-card">
+                    <div class="research-content">
+                        <div class="research-status">
+                            <span class="status-badge completed" style="background-color: #4ade80; color: #000;">Completed</span>
+                        </div>
+                        <h3 class="research-title">GPU-Accelerated Adversarial Defense System</h3>
+                        <p class="research-description">
+                            Developed a fused GPU kernel for PyTorch that integrates spatial smoothing and feature squeezing to mitigate adversarial attacks (PGD). 
+                            The optimized implementation reduces inference overhead to a negligible 1.4%, compared to 68.3% using standard libraries like Kornia, 
+                            making robust defense viable for real-time systems.
+                        </p>
+                        <div class="project-links" style="margin-top: 15px;">
+                            <a href="https://github.com/johnny-tavares/Optimizing-Adversarial-Defenses-With-CUDA" class="project-link">View on GitHub</a>
+                            <a href="papers/CUDA_Defense_Paper.pdf" class="project-link" target="_blank">Read Paper (PDF)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="research-note">
+                <p><strong>Note:</strong> The research projects shown here are independent and exploratory in nature. While they are not formally published, they reflect my current academic interests and technical investigations. 
+                I plan to complete an honors thesis toward the end of my undergraduate studies, with a focus on hardware security, and hope to contribute to formal research with faculty in that area.
+                </p>
+            </div>
+        </section>
+
         <section id="projects" class="section">
             <div class="section-header">
-                <h2 class="section-title">Featured Projects</h2>
-                <p class="section-subtitle">A showcase of my technical projects spanning security research, threat detection, and reverse engineering.</p>
+                <h2 class="section-title">Security Operations & Tooling</h2>
+                <p class="section-subtitle">Development of defensive infrastructure, threat detection engines, and monitoring tools.</p>
             </div>
             
             <div class="projects-grid">
@@ -100,7 +150,7 @@
                         <img src="Images/Dashboard.png" alt="Threat Dashboard Interface" />
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">Threat Dashboard</h3>
+                        <h3 class="project-title">Endpoint Telemetry & Threat Monitor</h3>
                         <p class="project-description">A cross-platform monitoring tool with Python backend and web-based frontend to track live system behavior, including DNS queries, file modifications, and unsigned processes. Features VirusTotal API integration and structured logging for forensic traceability.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Python</span>
@@ -119,7 +169,7 @@
                         <img src="Images/SIEM.png" alt="SIEM Dashboard Alert" />
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">SIEM Homelab</h3>
+                        <h3 class="project-title">Detection Engineering Infrastructure</h3>
                         <p class="project-description">A comprehensive SIEM lab built with Splunk for real-world threat detection. Monitors SSH brute-force attempts, file integrity changes, and lateral movement. Recently expanded with my Active Directory lab, for attack detection including Kerberoasting and Golden Ticket attacks.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Splunk</span>
@@ -322,56 +372,6 @@
                         </div>
                     </div>
                 </a>
-            </div>
-        </section>
-
-        <section id="research" class="section">
-            <div class="section-header">
-                <h2 class="section-title">Security Research</h2>
-                <p class="section-subtitle">Ongoing research projects exploring system internals, exploitation techniques, and emerging security threats.</p>
-            </div>
-            
-            <div class="research-grid">
-                <div class="research-card">
-                    <div class="research-content">
-                        <div class="research-status">
-                            <span class="status-badge completed" style="background-color: #4ade80; color: #000;">Completed</span>
-                        </div>
-                        <h3 class="research-title">LLVM-Based Kernel Backdoor Injection (PoC)</h3>
-                        <p class="research-description">
-                            Developed an LLVM pass capable of scanning the intermediate representation of Linux kernel source files
-                            for privilege-granting functions. The tool injects code to act as a backdoor for malicious processes, 
-                            demonstrating supply chain risks inspired by Ken Thompson's "Trusting Trust".
-                        </p>
-                        <div class="project-links" style="margin-top: 15px;">
-                            <a href="https://github.com/johnny-tavares/Offensive-LLVM-Pass" class="project-link">View on GitHub</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="research-card">
-                    <div class="research-content">
-                        <div class="research-status">
-                            <span class="status-badge completed" style="background-color: #4ade80; color: #000;">Completed</span>
-                        </div>
-                        <h3 class="research-title">Optimizing Adversarial Defenses With CUDA</h3>
-                        <p class="research-description">
-                            Developed a fused GPU kernel for PyTorch that integrates spatial smoothing and feature squeezing to mitigate adversarial attacks (PGD). 
-                            The optimized implementation reduces inference overhead to a negligible 1.4%, compared to 68.3% using standard libraries like Kornia, 
-                            making robust defense viable for real-time systems.
-                        </p>
-                        <div class="project-links" style="margin-top: 15px;">
-                            <a href="https://github.com/johnny-tavares/Optimizing-Adversarial-Defenses-With-CUDA" class="project-link">View on GitHub</a>
-                            <a href="papers/CUDA_Defense_Paper.pdf" class="project-link" target="_blank">Read Paper (PDF)</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="research-note">
-                <p><strong>Note:</strong> The research projects shown here are independent and exploratory in nature. While they are not formally published, they reflect my current academic interests and technical investigations. 
-                I plan to complete an honors thesis toward the end of my undergraduate studies, with a focus on hardware security, and hope to contribute to formal research with faculty in that area.
-                </p>
             </div>
         </section>
 
