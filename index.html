@@ -137,9 +137,11 @@
                         </div>
                         <h3 class="research-title">Schedule-Guided Concurrency Fuzzer</h3>
                         <p class="research-description">
-                            Designing a novel feedback-loop fuzzer that treats thread schedules as deterministic inputs to systematically expose race conditions and atomicity violations. 
-                            The architecture utilizes custom LLVM instrumentation to enforce schedule vectors and plans to integrate Trail of Bits' Remill to lift binaries for black-box analysis. 
-                            Current research focuses on solving the "collision problem" in distributed fuzzing via a shared, real-time schedule coverage map.
+                            Designing a feedback-driven concurrency fuzzer that treats thread schedules as deterministic inputs, enabling systematic 
+                            exploration of race conditions and atomicity violations. The system uses custom LLVM instrumentation to expose and control 
+                            synchronization points, enforcing reproducible schedule vectors during execution. Ongoing work investigates distributed 
+                            schedule exploration, addressing the collision problem via a shared, real-time schedule coverage map. Future extensions 
+                            include integrating binary lifting (e.g., Remill) to support black-box fuzzing of closed-source targets.
                         </p>
                         <div class="project-links" style="margin-top: 15px;">
                             <a href="#" class="project-link" style="opacity: 0.6; cursor: default;">GitHub Coming Soon</a>
