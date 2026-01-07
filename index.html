@@ -91,7 +91,7 @@
         <section id="research" class="section">
             <div class="section-header">
                 <h2 class="section-title">Systems Security Research</h2>
-                <p class="section-subtitle">Low-level engineering projects exploring compiler-based attacks and hardware-accelerated defense.</p>
+                <p class="section-subtitle">Ongoing research projects exploring system internals, exploitation techniques, and emerging security threats</p>
             </div>
             
             <div class="research-grid">
@@ -129,6 +129,24 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="research-card">
+                    <div class="research-content">
+                        <div class="research-status">
+                            <span class="status-badge in-progress" style="background-color: #facc15; color: #000;">In Progress</span>
+                        </div>
+                        <h3 class="research-title">Schedule-Guided Concurrency Fuzzer</h3>
+                        <p class="research-description">
+                            Designing a novel feedback-loop fuzzer that treats thread schedules as deterministic inputs to systematically expose race conditions and atomicity violations. 
+                            The architecture utilizes custom LLVM instrumentation to enforce schedule vectors and plans to integrate Trail of Bits' Remill to lift binaries for black-box analysis. 
+                            Current research focuses on solving the "collision problem" in distributed fuzzing via a shared, real-time schedule coverage map.
+                        </p>
+                        <div class="project-links" style="margin-top: 15px;">
+                            <a href="#" class="project-link" style="opacity: 0.6; cursor: default;">GitHub Coming Soon</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             
             <div class="research-note">
@@ -169,7 +187,7 @@
                         <img src="Images/SIEM.png" alt="SIEM Dashboard Alert" />
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">Detection Engineering Infrastructure</h3>
+                        <h3 class="project-title">SIEM Homelab</h3>
                         <p class="project-description">A comprehensive SIEM lab built with Splunk for real-world threat detection. Monitors SSH brute-force attempts, file integrity changes, and lateral movement. Recently expanded with my Active Directory lab, for attack detection including Kerberoasting and Golden Ticket attacks.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Splunk</span>
